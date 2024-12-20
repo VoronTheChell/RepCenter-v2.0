@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using System;
 
 public class TableManager : MonoBehaviour
 {
     public GameObject rowPrefab; // Префаб строки
-    public Transform content;   // Контейнер (Content) таблицы
+    public Transform content;    // Контейнер (Content) таблицы
+
+    // Строка подключения к базе данных
+    private string connectionString = "Data Source=192.168.0.105,1433; Initial Catalog=RepCenter; User ID = sa; Password=antares;;";
 
     // Метод для добавления строки
     public void AddRow(string[] rowData)
@@ -18,38 +24,67 @@ public class TableManager : MonoBehaviour
         }
     }
 
-    // Пример заполнения таблицы
+    // Метод для загрузки данных из базы данных
+    private void LoadDataFromDatabase()
+    {
+        // Очистка существующих строк в таблице
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = @"
+                    SELECT 
+                        r.schedule_id AS 'ID', 
+                        s.FIO AS 'Ученик', 
+                        t.FIO AS 'Учитель', 
+                        r.Time_Learn AS 'Время начала занятия', 
+                        r.Learn_Status AS 'Статус занятия'
+                    FROM 
+                        Raspisanie_Zaniyatiy r
+                    JOIN 
+                        Student s ON r.student_id = s.student_id
+                    JOIN 
+                        Repetitors t ON r.tutor_id = t.tutor_id;
+                ";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string[] rowData = new string[]
+                        {
+                            reader["ID"].ToString(),
+                            reader["Ученик"].ToString(),
+                            reader["Учитель"].ToString(),
+                            reader["Время начала занятия"].ToString(),
+                            reader["Статус занятия"].ToString()
+                        };
+
+                        AddRow(rowData);
+                    }
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            Debug.LogError("Ошибка подключения к базе данных: " + ex.Message);
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            Debug.LogError("Ошибка доступа к полю: " + ex.Message);
+        }
+    }
+
+    // Метод вызывается при старте приложения
     private void Start()
     {
-        AddRow(new[] { "1", "Мария И.К.", "Петров И.В.", "09:00", "началось" });
-        AddRow(new[] { "2", "Екатерина В.С.", "Кузнецова А.С.", "19:00", "не состоялось" });
-        AddRow(new[] { "3", "Игорь С.Л.", "Смирнов А.П.", "21:00", "не началось" });
-        AddRow(new[] { "4", "Сергей Н.В.", "Смирнов А.П.", "21:00", "не состоялось" });
-        AddRow(new[] { "5", "Ольга А.В.", "Петров И.В.", "11:00", "началось" });
-        AddRow(new[] { "6", "Анна Б.С.", "Кузнецова А.С.", "14:00", "началось" });
-        AddRow(new[] { "7", "Светлана И.П.", "Смирнов А.П.", "15:30", "не началось" });
-        AddRow(new[] { "8", "Виктор Н.М.", "Петров И.В.", "16:00", "началось" });
-        AddRow(new[] { "9", "Мария И.К.", "Кузнецова А.С.", "18:00", "началось" });
-        AddRow(new[] { "10", "Дмитрий К.Р.", "Смирнов А.П.", "09:30", "не началось" });
-        AddRow(new[] { "11", "Екатерина В.С.", "Кузнецова А.С.", "12:00", "не состоялось" });
-        AddRow(new[] { "12", "Алексей Н.О.", "Петров И.В.", "13:00", "началось" });
-        AddRow(new[] { "13", "Мария И.К.", "Кузнецова А.С.", "20:00", "не началось" });
-        AddRow(new[] { "14", "Сергей Н.В.", "Смирнов А.П.", "17:30", "началось" });
-        AddRow(new[] { "15", "Валентина Р.Т.", "Кузнецова А.С.", "08:00", "началось" });
-        AddRow(new[] { "16", "Анатолий К.П.", "Петров И.В.", "10:30", "не состоялось" });
-        AddRow(new[] { "17", "Елена А.Г.", "Смирнов А.П.", "13:30", "не началось" });
-        AddRow(new[] { "18", "Николай Д.В.", "Петров И.В.", "15:00", "началось" });
-        AddRow(new[] { "19", "Юлия Л.В.", "Кузнецова А.С.", "18:30", "не состоялось" });
-        AddRow(new[] { "20", "Владимир С.М.", "Смирнов А.П.", "20:00", "началось" });
-        AddRow(new[] { "21", "Дарья О.Н.", "Петров И.В.", "09:15", "не состоялось" });
-        AddRow(new[] { "22", "Татьяна Е.К.", "Кузнецова А.С.", "11:45", "началось" });
-        AddRow(new[] { "23", "Александр В.С.", "Смирнов А.П.", "13:00", "не началось" });
-        AddRow(new[] { "24", "Олег И.В.", "Петров И.В.", "16:30", "началось" });
-        AddRow(new[] { "25", "Полина Р.С.", "Кузнецова А.С.", "18:45", "не состоялось" });
-        AddRow(new[] { "26", "Максим К.В.", "Смирнов А.П.", "20:15", "не началось" });
-        AddRow(new[] { "27", "Станислав М.Н.", "Петров И.В.", "08:45", "началось" });
-        AddRow(new[] { "28", "Ксения И.А.", "Кузнецова А.С.", "10:00", "не состоялось" });
-        AddRow(new[] { "29", "Анастасия В.П.", "Смирнов А.П.", "12:30", "началось" });
-        AddRow(new[] { "30", "Григорий Л.Д.", "Петров И.В.", "14:15", "не началось" });
+        LoadDataFromDatabase();
     }
 }

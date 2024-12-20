@@ -1,6 +1,0 @@
-@MilkDeliveryAPI_HostAddress = http://localhost:5119
-
-GET {{MilkDeliveryAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
