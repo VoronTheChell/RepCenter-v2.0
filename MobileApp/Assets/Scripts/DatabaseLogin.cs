@@ -4,17 +4,16 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
-
 public class DatabaseLogin : MonoBehaviour
 {
     public TMP_InputField loginInputField;  // Поле для ввода логина
     public TMP_InputField passwordInputField;  // Поле для ввода пароля
-    public Text statusText;  // Текст для отображения статуса (успех или ошибка)
+    public TextMeshProUGUI statusText;      // Текст для отображения статуса (успех или ошибка)
 
     public Canvas loginCanvas;  // Canvas входа
     public Canvas mainCanvas;   // Canvas для отображения после успешного входа
 
-    private string apiUrl = "http://192.168.0.105:5000/api/Auth/login"; // URL вашего API
+    private string loginUrl = "http://127.0.0.1:5000/login"; // URL вашего API для авторизации
 
     void Start()
     {
@@ -24,18 +23,24 @@ public class DatabaseLogin : MonoBehaviour
 
     public void OnLoginButtonClicked()
     {
-        string login = loginInputField.text;
-        string password = passwordInputField.text;
+        string login = loginInputField.text.Trim();
+        string password = passwordInputField.text.Trim();
+
+        if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+        {
+            statusText.text = "Введите логин и пароль!";
+            return;
+        }
 
         StartCoroutine(SendLoginRequest(login, password));
     }
 
     private IEnumerator SendLoginRequest(string login, string password)
     {
-        var requestData = new LoginRequest { Login = login, Password = password };
+        var requestData = new LoginRequest { login_user = login, password_user = password };
         string jsonData = JsonUtility.ToJson(requestData);
 
-        UnityWebRequest request = new UnityWebRequest(apiUrl, "POST");
+        UnityWebRequest request = new UnityWebRequest(loginUrl, "POST");
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
@@ -45,19 +50,26 @@ public class DatabaseLogin : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
-            statusText.text = "Ошибка подключения к серверу: " + request.error;
+            statusText.text = $"Ошибка подключения к серверу: {request.error}";
         }
         else
         {
-            var response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
-            if (response.success)
+            try
             {
-                statusText.text = "Успешный вход!";
-                SwitchCanvas();
+                var response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+                if (response.success)
+                {
+                    statusText.text = "Успешный вход!";
+                    SwitchCanvas();
+                }
+                else
+                {
+                    statusText.text = response.message;
+                }
             }
-            else
+            catch
             {
-                statusText.text = response.message;
+                statusText.text = "Ошибка обработки ответа сервера.";
             }
         }
     }
@@ -71,8 +83,8 @@ public class DatabaseLogin : MonoBehaviour
     [System.Serializable]
     public class LoginRequest
     {
-        public string Login;
-        public string Password;
+        public string login_user;
+        public string password_user;
     }
 
     [System.Serializable]
@@ -80,5 +92,8 @@ public class DatabaseLogin : MonoBehaviour
     {
         public bool success;
         public string message;
+        public int id_User;  // ID пользователя (если необходимо)
+        public string subject_user; // Предмет пользователя
+        public string status_user;  // Статус пользователя
     }
 }
