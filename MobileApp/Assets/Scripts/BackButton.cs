@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BackButton : MonoBehaviour
 {
-    public Canvas loginCanvas;  // Canvas входа
-    public Canvas mainCanvas;   // Canvas для отображения после успешного входа
+    public Canvas loginCanvas;
+    public Canvas mainCanvas;
 
     public void SwitchCanvas()
     {

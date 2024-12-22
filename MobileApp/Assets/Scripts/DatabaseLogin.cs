@@ -1,22 +1,24 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
 public class DatabaseLogin : MonoBehaviour
 {
-    public TMP_InputField loginInputField;  // Поле для ввода логина
-    public TMP_InputField passwordInputField;  // Поле для ввода пароля
-    public TextMeshProUGUI statusText;      // Текст для отображения статуса (успех или ошибка)
+    public TMP_InputField loginInputField;
+    public TMP_InputField passwordInputField;
+    public TextMeshProUGUI statusText;
 
-    public Canvas loginCanvas;  // Canvas входа
-    public Canvas mainCanvas;   // Canvas для отображения после успешного входа
+    public Canvas loginCanvas;
+    public Canvas mainCanvas;
 
-    private string loginUrl = "http://127.0.0.1:5000/login"; // URL вашего API для авторизации
+    private string loginUrl = "http://192.168.0.100:5000/login";
 
     void Start()
     {
+        passwordInputField.contentType = TMP_InputField.ContentType.Password;
+        passwordInputField.ForceLabelUpdate();
+
         loginCanvas.gameObject.SetActive(true);
         mainCanvas.gameObject.SetActive(false);
     }
@@ -59,7 +61,11 @@ public class DatabaseLogin : MonoBehaviour
                 var response = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
                 if (response.success)
                 {
-                    statusText.text = "Успешный вход!";
+                    statusText.text = "";
+
+                    loginInputField.text = "";
+                    passwordInputField.text = "";
+
                     SwitchCanvas();
                 }
                 else
@@ -92,8 +98,8 @@ public class DatabaseLogin : MonoBehaviour
     {
         public bool success;
         public string message;
-        public int id_User;  // ID пользователя (если необходимо)
-        public string subject_user; // Предмет пользователя
-        public string status_user;  // Статус пользователя
+        public int id_User;
+        public string subject_user;
+        public string status_user;
     }
 }
