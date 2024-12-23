@@ -138,6 +138,52 @@ namespace RepetBase_App
             dataBase.closeConnection();
         }
 
+        private void UpdateLogListBox(string logMessage)
+        {
+            if (listBoxLogs.InvokeRequired)
+            {
+                listBoxLogs.Invoke(new Action(() => listBoxLogs.Items.Add(logMessage)));
+            }
+            else
+            {
+                listBoxLogs.Items.Add(logMessage);
+            }
+
+            // Автоматическая прокрутка к последнему элементу
+            listBoxLogs.TopIndex = listBoxLogs.Items.Count - 1;
+        }
+
+
+        public void AddLog(string tableName, string action, string details, int? userId = null)
+        {
+            string query = "INSERT INTO log_table (log_date, user_id, table_name, action, details) VALUES (GETDATE(), @UserID, @TableName, @Action, @Details)";
+
+            try
+            {
+                dataBase.openConnection();
+                using (SqlCommand command = new SqlCommand(query, dataBase.GetConnection()))
+                {
+                    command.Parameters.AddWithValue("@UserID", 1);
+                    command.Parameters.AddWithValue("@TableName", tableName);
+                    command.Parameters.AddWithValue("@Action", action);
+                    command.Parameters.AddWithValue("@Details", details);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при записи лога: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dataBase.closeConnection();
+            }
+
+            // Обновляем ListBox
+            UpdateLogListBox($"{DateTime.Now}: {action} в таблице {tableName} - {details}");
+        }
+
         private int GetIDByNameStudent(string selectedName)
         {
             // Устанавливаем значение по умолчанию, если ID не найден
@@ -350,6 +396,7 @@ namespace RepetBase_App
             if (string.IsNullOrEmpty(UserLogin_TB.Text) || string.IsNullOrEmpty(UserPass_TB.Text) || string.IsNullOrEmpty(Users_Primary_CB.Text) || string.IsNullOrEmpty(TypeOfUser_CB.Text))
             {
                 MessageBox.Show("Отсутсвует выбранная запись для удаления!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AddLog("register", "Удаление - ОТМЕНА", $"Действие отменено, тк администратор не предоставил инфо. о выбранном пользователем!", 1);
                 return;
             }
 
@@ -362,6 +409,12 @@ namespace RepetBase_App
                 ClearUserFields();
                 CreateColumns();
                 MessageBox.Show("Запись успешно удалена!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AddLog("register", "Удаление - УСПЕШНО", $"Пользователь {UserLogin_TB.Text}, был успешно удален с БД!", 1);
+            }
+
+            else
+            {
+                AddLog("register", "Удаление - ОТМЕНА", $"Действие было отменено администратором!", 1);
             }
         }
 
@@ -375,6 +428,7 @@ namespace RepetBase_App
                          ("@Status", TypeOfUser_CB.Text));
             ClearUserFields();
             CreateColumns();
+            AddLog("register", "Добавление - УСПЕШНО", $"Действие было отменено администратором!", 1);
             MessageBox.Show("Запись успешно создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -389,6 +443,7 @@ namespace RepetBase_App
                          ("@UserID", id_users));
             ClearUserFields();
             CreateColumns();
+            AddLog("register", "Изменение - УСПЕШНО", $"Был изменен пользователь по ID:{id_users}!", 1);
             MessageBox.Show("Запись успешно изменена!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
@@ -959,6 +1014,11 @@ namespace RepetBase_App
         }
 
         private void DataLearnDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void UserTab_Click(object sender, EventArgs e)
         {
 
         }

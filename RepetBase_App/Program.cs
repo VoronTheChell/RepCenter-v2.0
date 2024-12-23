@@ -6,7 +6,7 @@ namespace RepetBase_App
 {
     internal class DataBase
     {
-        public SqlConnection sqlConnection = new SqlConnection(@"Data Source=VORONPC\MSSQLS; Initial Catalog=RepCenter; Integrated Security=true");
+        public SqlConnection sqlConnection = new SqlConnection(@"Data Source=VORONPC\SQLEXPRESS; Initial Catalog=RepCenter; Integrated Security=true");
 
         public void openConnection()
         {
@@ -52,7 +52,7 @@ namespace RepetBase_App
             Application.SetCompatibleTextRenderingDefault(false);
             dataBase.CheckConnection();
 
-            Application.Run(new LoginUp_Form());
+            Application.Run(new Admin_Form());
         }
     }
 }

@@ -143,6 +143,10 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.TabMenu = new System.Windows.Forms.TabControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.listBoxLogs = new System.Windows.Forms.ListBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.PaymentTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -175,6 +179,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClearButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDGV)).BeginInit();
             this.TabMenu.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -184,7 +190,7 @@
             this.информацияДляАдминовToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1285, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1787, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -200,21 +206,21 @@
             // сохранитьФайлToolStripMenuItem
             // 
             this.сохранитьФайлToolStripMenuItem.Name = "сохранитьФайлToolStripMenuItem";
-            this.сохранитьФайлToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.сохранитьФайлToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.сохранитьФайлToolStripMenuItem.Text = "Сохранить файл";
             this.сохранитьФайлToolStripMenuItem.Click += new System.EventHandler(this.сохранитьФайлToolStripMenuItem_Click);
             // 
             // выйтиToolStripMenuItem
             // 
             this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.выйтиToolStripMenuItem.Text = "Выйти...";
             this.выйтиToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
             // 
             // информацияДляАдминовToolStripMenuItem
             // 
             this.информацияДляАдминовToolStripMenuItem.Name = "информацияДляАдминовToolStripMenuItem";
-            this.информацияДляАдминовToolStripMenuItem.Size = new System.Drawing.Size(172, 20);
+            this.информацияДляАдминовToolStripMenuItem.Size = new System.Drawing.Size(168, 20);
             this.информацияДляАдминовToolStripMenuItem.Text = "Информация для Админов";
             // 
             // PaymentTab
@@ -238,10 +244,10 @@
             this.PaymentTab.Controls.Add(this.panel6);
             this.PaymentTab.Controls.Add(this.PaymentDGV);
             this.PaymentTab.Controls.Add(this.buttonDel6);
-            this.PaymentTab.Location = new System.Drawing.Point(4, 25);
+            this.PaymentTab.Location = new System.Drawing.Point(4, 22);
             this.PaymentTab.Name = "PaymentTab";
             this.PaymentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PaymentTab.Size = new System.Drawing.Size(1253, 581);
+            this.PaymentTab.Size = new System.Drawing.Size(1253, 584);
             this.PaymentTab.TabIndex = 5;
             this.PaymentTab.Text = "Статистика Оплаты Занятий";
             this.PaymentTab.UseVisualStyleBackColor = true;
@@ -461,10 +467,10 @@
             this.SubjectTab.Controls.Add(this.panel5);
             this.SubjectTab.Controls.Add(this.LearnThemeDGV);
             this.SubjectTab.Controls.Add(this.buttonDel5);
-            this.SubjectTab.Location = new System.Drawing.Point(4, 25);
+            this.SubjectTab.Location = new System.Drawing.Point(4, 22);
             this.SubjectTab.Name = "SubjectTab";
             this.SubjectTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SubjectTab.Size = new System.Drawing.Size(1253, 581);
+            this.SubjectTab.Size = new System.Drawing.Size(1253, 584);
             this.SubjectTab.TabIndex = 4;
             this.SubjectTab.Text = "Предметы для учёбы";
             this.SubjectTab.UseVisualStyleBackColor = true;
@@ -591,10 +597,10 @@
             this.ScheduleTab.Controls.Add(this.panel4);
             this.ScheduleTab.Controls.Add(this.DataLearnDGV);
             this.ScheduleTab.Controls.Add(this.buttonDel4);
-            this.ScheduleTab.Location = new System.Drawing.Point(4, 25);
+            this.ScheduleTab.Location = new System.Drawing.Point(4, 22);
             this.ScheduleTab.Name = "ScheduleTab";
             this.ScheduleTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ScheduleTab.Size = new System.Drawing.Size(1253, 581);
+            this.ScheduleTab.Size = new System.Drawing.Size(1253, 584);
             this.ScheduleTab.TabIndex = 3;
             this.ScheduleTab.Text = "Рассписание";
             this.ScheduleTab.UseVisualStyleBackColor = true;
@@ -655,7 +661,7 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(904, 243);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(43, 13);
+            this.label22.Size = new System.Drawing.Size(44, 13);
             this.label22.TabIndex = 23;
             this.label22.Text = "Время:";
             // 
@@ -807,10 +813,10 @@
             this.RepetTab.Controls.Add(this.panel3);
             this.RepetTab.Controls.Add(this.TeacherDGV);
             this.RepetTab.Controls.Add(this.buttonDel3);
-            this.RepetTab.Location = new System.Drawing.Point(4, 25);
+            this.RepetTab.Location = new System.Drawing.Point(4, 22);
             this.RepetTab.Name = "RepetTab";
             this.RepetTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RepetTab.Size = new System.Drawing.Size(1253, 581);
+            this.RepetTab.Size = new System.Drawing.Size(1253, 584);
             this.RepetTab.TabIndex = 2;
             this.RepetTab.Text = "Репетиторы";
             this.RepetTab.UseVisualStyleBackColor = true;
@@ -998,10 +1004,10 @@
             this.SrudentTab.Controls.Add(this.panel2);
             this.SrudentTab.Controls.Add(this.StudentDGV);
             this.SrudentTab.Controls.Add(this.buttonDel2);
-            this.SrudentTab.Location = new System.Drawing.Point(4, 25);
+            this.SrudentTab.Location = new System.Drawing.Point(4, 22);
             this.SrudentTab.Name = "SrudentTab";
             this.SrudentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SrudentTab.Size = new System.Drawing.Size(1253, 581);
+            this.SrudentTab.Size = new System.Drawing.Size(1253, 584);
             this.SrudentTab.TabIndex = 1;
             this.SrudentTab.Text = "Студенты";
             this.SrudentTab.UseVisualStyleBackColor = true;
@@ -1191,13 +1197,14 @@
             this.UserTab.Controls.Add(this.panel1);
             this.UserTab.Controls.Add(this.UsersDGV);
             this.UserTab.Controls.Add(this.buttonDel);
-            this.UserTab.Location = new System.Drawing.Point(4, 25);
+            this.UserTab.Location = new System.Drawing.Point(4, 22);
             this.UserTab.Name = "UserTab";
             this.UserTab.Padding = new System.Windows.Forms.Padding(3);
-            this.UserTab.Size = new System.Drawing.Size(1253, 581);
+            this.UserTab.Size = new System.Drawing.Size(1253, 584);
             this.UserTab.TabIndex = 0;
             this.UserTab.Text = "Пользователи";
             this.UserTab.UseVisualStyleBackColor = true;
+            this.UserTab.Click += new System.EventHandler(this.UserTab_Click);
             // 
             // TypeOfUser_CB
             // 
@@ -1226,7 +1233,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(904, 301);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(106, 13);
+            this.label11.Size = new System.Drawing.Size(105, 13);
             this.label11.TabIndex = 15;
             this.label11.Text = "Тип пользователя:";
             // 
@@ -1389,12 +1396,55 @@
             this.saveFileDialog1.FileName = "TestTableSavePdf";
             this.saveFileDialog1.Filter = "PDF(*.pdf)|*.pdf";
             // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.listBoxLogs);
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Location = new System.Drawing.Point(1279, 27);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(496, 606);
+            this.panel7.TabIndex = 6;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.White;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.label29);
+            this.panel8.Location = new System.Drawing.Point(13, 6);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(469, 49);
+            this.panel8.TabIndex = 0;
+            // 
+            // listBoxLogs
+            // 
+            this.listBoxLogs.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxLogs.FormattingEnabled = true;
+            this.listBoxLogs.HorizontalScrollbar = true;
+            this.listBoxLogs.ItemHeight = 17;
+            this.listBoxLogs.Location = new System.Drawing.Point(13, 62);
+            this.listBoxLogs.Name = "listBoxLogs";
+            this.listBoxLogs.Size = new System.Drawing.Size(469, 514);
+            this.listBoxLogs.TabIndex = 1;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label29.Location = new System.Drawing.Point(207, 11);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(72, 25);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "ЛОГГИ";
+            // 
             // Admin_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1285, 647);
+            this.ClientSize = new System.Drawing.Size(1787, 647);
             this.ControlBox = false;
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.TabMenu);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -1441,6 +1491,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClearButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDGV)).EndInit();
             this.TabMenu.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1561,5 +1614,9 @@
         private System.Windows.Forms.ComboBox PayScoller_CB;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox PayStatus_CB;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.ListBox listBoxLogs;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label29;
     }
 }
