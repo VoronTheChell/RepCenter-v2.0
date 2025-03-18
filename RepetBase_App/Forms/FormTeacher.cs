@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Aspose.Pdf;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using RepetBase_App.Forms;
 
 namespace RepetBase_App
 {
@@ -14,15 +14,18 @@ namespace RepetBase_App
         int selectdRow;
         int id_raspisanie, id_student, id_teacher;
 
-        public DataTable paymentDataTable;
-
-        public FormTeacher()
+        public FormTeacher(int teacherId)
         {
             InitializeComponent();
 
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            StartPosition = FormStartPosition.CenterScreen;
+
+            id_teacher = FindTeacherID(teacherId.ToString()); // Сохраняем ID учителя
             LoadScoolersToComboBox();
-            LoadTeachersToComboBox();
         }
+
 
         private void FormTeacher_Load(object sender, EventArgs e)
         {
@@ -30,12 +33,9 @@ namespace RepetBase_App
             dataGridView2.ReadOnly = false;
             dataGridView3.ReadOnly = true;
 
-            MaximizeBox = false;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            StartPosition = FormStartPosition.CenterScreen;
+            
 
             SelectStudent_CB.DropDownStyle = ComboBoxStyle.DropDownList;
-            SelectTeacher_CB.DropDownStyle = ComboBoxStyle.DropDownList;
             StatusZanytia_CB.DropDownStyle = ComboBoxStyle.DropDownList;
 
             LoadData();
@@ -77,17 +77,17 @@ namespace RepetBase_App
             return id_student;
         }
 
-        private int GetIDByNameTeacher(string selectedName)
+        private int FindTeacherID(string selectedID)
         {
             id_teacher = -1; // Значение по умолчанию, если ID не найден
 
             try
             {
                 dataBase.openConnection(); // Открываем подключение
-                string query = "SELECT tutor_id FROM Repetitors WHERE FIO = @Name";
+                string query = "SELECT tutor_id FROM Repetitors WHERE id_User = @id_User";
                 using (SqlCommand command = new SqlCommand(query, dataBase.GetConnection()))
                 {
-                    command.Parameters.AddWithValue("@Name", selectedName);
+                    command.Parameters.AddWithValue("@id_User", selectedID);
 
                     var result = command.ExecuteScalar();
                     if (result != null)
@@ -120,9 +120,17 @@ namespace RepetBase_App
 
         private void CreateColumns_Students()
         {
-            using (SqlCommand com = new SqlCommand(@"SELECT student_id AS 'ID', FIO AS 'ФИО', Date_Birth AS 'Дата рождения', 
-                                                 Number_Phone AS 'Номер телефона', Predmet AS 'Предмет для изучения' FROM Student", dataBase.GetConnection()))
+            using (SqlCommand com = new SqlCommand(@"
+        SELECT DISTINCT s.student_id AS 'ID', 
+                        s.FIO AS 'ФИО', 
+                        s.Date_Birth AS 'Дата рождения', 
+                        s.Number_Phone AS 'Номер телефона', 
+                        s.Predmet AS 'Предмет для изучения' 
+        FROM Student s
+        JOIN Raspisanie_Zaniyatiy r ON s.student_id = r.student_id
+        WHERE r.tutor_id = @TutorID", dataBase.GetConnection()))
             {
+                com.Parameters.AddWithValue("@TutorID", id_teacher);
                 SqlDataAdapter adapter = new SqlDataAdapter(com);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "Student");
@@ -132,10 +140,16 @@ namespace RepetBase_App
 
         private void CreateColumns_DataTime()
         {
-            using (SqlCommand com = new SqlCommand(@"SELECT r.schedule_id AS 'ID', s.FIO AS 'Ученик', t.FIO AS 'Учитель', r.Time_Learn AS 'Время начала занятия', 
-                                                    r.Learn_Status AS 'Статус занятия' FROM Raspisanie_Zaniyatiy r JOIN Student s ON r.student_id = s.student_id 
-                                                    JOIN Repetitors t ON r.tutor_id = t.tutor_id", dataBase.GetConnection()))
+            using (SqlCommand com = new SqlCommand(@"
+        SELECT r.schedule_id AS 'ID', 
+               s.FIO AS 'Ученик', 
+               r.Time_Learn AS 'Время начала занятия', 
+               r.Learn_Status AS 'Статус занятия'
+        FROM Raspisanie_Zaniyatiy r
+        JOIN Student s ON r.student_id = s.student_id
+        WHERE r.tutor_id = @TutorID", dataBase.GetConnection()))
             {
+                com.Parameters.AddWithValue("@TutorID", id_teacher);
                 SqlDataAdapter adapter = new SqlDataAdapter(com);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "Raspisanie_Zaniyatiy");
@@ -145,15 +159,25 @@ namespace RepetBase_App
 
         private void CreateColumns_Payment()
         {
-            using (SqlCommand com = new SqlCommand(@"SELECT p.payment_id AS 'ID', s.FIO AS 'Студент', t.FIO AS 'Репетитор', p.Date_of_Payment AS 'Дата оплаты', p.Summ_Payment AS 'Сумма оплаты', 
-                                                    p.Status_Pay AS 'Статус оплаты' FROM Payment p JOIN Student s ON p.student_id = s.student_id JOIN Repetitors t ON p.tutor_id = t.tutor_id;", dataBase.GetConnection()))
+            using (SqlCommand com = new SqlCommand(@"
+               SELECT p.payment_id AS 'ID', 
+               s.FIO AS 'Студент', 
+               p.Date_of_Payment AS 'Дата оплаты', 
+               p.Summ_Payment AS 'Сумма оплаты', 
+               p.Status_Pay AS 'Статус оплаты'
+               FROM Payment p
+               JOIN Student s ON p.student_id = s.student_id
+               WHERE p.tutor_id = @TutorID", dataBase.GetConnection()))
             {
+                com.Parameters.AddWithValue("@TutorID", id_teacher);
                 SqlDataAdapter adapter = new SqlDataAdapter(com);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "Payment");
                 dataGridView3.DataSource = ds.Tables[0];
             }
         }
+
+
 
         private void SearchUpStudents(DataGridView DGV)
         {
@@ -187,9 +211,8 @@ namespace RepetBase_App
 
                     id_raspisanie = Convert.ToInt32(row.Cells[0].Value);
                     SelectStudent_CB.Text = row.Cells[1].Value.ToString();
-                    SelectTeacher_CB.Text = row.Cells[2].Value.ToString();
-                    DateLearn_DTP.Text = row.Cells[3].Value.ToString();
-                    StatusZanytia_CB.Text = row.Cells[4].Value.ToString();
+                    DateLearn_DTP.Text = row.Cells[2].Value.ToString();
+                    StatusZanytia_CB.Text = row.Cells[3].Value.ToString();
                 }
                 catch
                 {
@@ -220,31 +243,9 @@ namespace RepetBase_App
             dataBase.closeConnection();
         }
 
-        public void LoadTeachersToComboBox()
-        {
-            // Очищаем ComboBox перед заполнением
-            SelectTeacher_CB.Items.Clear();
-
-            // SQL-запрос для получения названий предметов из таблицы Repetitors
-            string query = "SELECT FIO FROM Repetitors";
-
-            // Открываем соединение и выполняем запрос
-            dataBase.openConnection();
-            using (SqlCommand command = new SqlCommand(query, dataBase.GetConnection()))
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    // Добавляем каждый предмет в ComboBox
-                    SelectTeacher_CB.Items.Add(reader["FIO"].ToString());
-                }
-            }
-            dataBase.closeConnection();
-        }
-
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(SelectStudent_CB.Text) || string.IsNullOrEmpty(SelectTeacher_CB.Text) || string.IsNullOrEmpty(DateLearn_DTP.Text) || string.IsNullOrEmpty(StatusZanytia_CB.Text))
+            if (string.IsNullOrEmpty(SelectStudent_CB.Text) || string.IsNullOrEmpty(DateLearn_DTP.Text) || string.IsNullOrEmpty(StatusZanytia_CB.Text))
             {
                 MessageBox.Show("Отсутствует выбранная запись для удаления!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -267,7 +268,6 @@ namespace RepetBase_App
             string addCommand = "INSERT INTO Raspisanie_Zaniyatiy (student_id, tutor_id, Time_Learn, Learn_Status) VALUES (@StudentID, @TutorID, @TimeBegin, @Learn_Status )";
 
             id_student = GetIDByNameStudent(SelectStudent_CB.Text);
-            id_teacher = GetIDByNameTeacher(SelectTeacher_CB.Text);
 
             ExecuteQuery(addCommand, ("@StudentID", id_student), ("@TutorID", id_teacher), ("@TimeBegin", DateLearn_DTP.Text), ("@Learn_Status ", StatusZanytia_CB.Text));
             ClearScheduleFields();
@@ -277,7 +277,7 @@ namespace RepetBase_App
 
         private void buttonChange_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(SelectStudent_CB.Text) || string.IsNullOrEmpty(SelectTeacher_CB.Text) || string.IsNullOrEmpty(DateLearn_DTP.Text) || string.IsNullOrEmpty(StatusZanytia_CB.Text))
+            if (string.IsNullOrEmpty(SelectStudent_CB.Text) || string.IsNullOrEmpty(DateLearn_DTP.Text) || string.IsNullOrEmpty(StatusZanytia_CB.Text))
             {
                 MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -286,7 +286,6 @@ namespace RepetBase_App
             string changeCommand = "UPDATE Raspisanie_Zaniyatiy SET student_id = @StudentID, tutor_id = @TutorID, Time_Learn = @TimeBegin, Learn_Status = @Learn_Status  WHERE schedule_id = @IDRaspis";
 
             id_student = GetIDByNameStudent(SelectStudent_CB.Text);
-            id_teacher = GetIDByNameTeacher(SelectTeacher_CB.Text);
 
             ExecuteQuery(changeCommand, ("@StudentID", id_student), ("@TutorID", id_teacher), ("@TimeBegin", DateLearn_DTP.Text), ("@Learn_Status", StatusZanytia_CB.Text), ("@IDRaspis", id_raspisanie));
             ClearScheduleFields();
@@ -297,7 +296,7 @@ namespace RepetBase_App
         private void ClearScheduleFields()
         {
             SelectStudent_CB.SelectedIndex = -1;
-            SelectTeacher_CB.SelectedIndex = -1;
+            //SelectTeacher_CB.SelectedIndex = -1;
             DateLearn_DTP.Text = "";
             StatusZanytia_CB.SelectedIndex = -1;
         }
@@ -340,6 +339,14 @@ namespace RepetBase_App
                 pdfDocument.Save(saveFileDialog1.FileName);
                 MessageBox.Show("Таблица успешно сохранена в PDF!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void оценкаУспеваемостиУченикаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StudentEvaluationForm studentEvaluationForm = new StudentEvaluationForm();
+            this.Hide();
+            studentEvaluationForm.ShowDialog();
+            this.Show();
         }
 
         private void FillPdfTableFromDataGridView(Aspose.Pdf.Table pdfTable, DataGridView dataGridView)

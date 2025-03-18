@@ -1,26 +1,32 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace RepetBase_App
 {
     public partial class sign_up : Form
     {
-        private readonly WMPLib.WindowsMediaPlayer _player = new WMPLib.WindowsMediaPlayer();
+        WMPLib.WindowsMediaPlayer _player = new WMPLib.WindowsMediaPlayer();
+        
         private readonly DataBase _dataBase = new DataBase();
 
         public sign_up()
         {
-            InitializeComponent();
+            InitializeComponent(); AppConfig();
             LoadSubjectsToComboBox();
+        }
 
+        private void AppConfig()
+        {
             StartPosition = FormStartPosition.CenterScreen;
             MaximizeBox = false;
 
+            comboBoxSubject.DropDownStyle = ComboBoxStyle.DropDownList;
+
             // Подключаем события для динамической проверки
-            textBox_login.TextChanged += ValidateForm;
-            textBox_password2.TextChanged += ValidateForm;
+            FIO_Student_TB.TextChanged += ValidateForm;
+            email_TB.TextChanged += ValidateForm;
             comboBoxSubject.SelectedIndexChanged += ValidateForm;
             checkBox1.CheckedChanged += ValidateForm;
 
@@ -49,42 +55,121 @@ namespace RepetBase_App
         private void ValidateForm(object sender, EventArgs e)
         {
             // Проверяем, что все необходимые поля заполнены
-            button1.Enabled = !string.IsNullOrWhiteSpace(textBox_login.Text) &&
-                              !string.IsNullOrWhiteSpace(textBox_password2.Text) &&
+            buttonReg.Enabled = !string.IsNullOrWhiteSpace(FIO_Student_TB.Text) &&
+                              !string.IsNullOrWhiteSpace(email_TB.Text) &&
+                              !string.IsNullOrWhiteSpace(nuberPhone_TB.Text) &&
+                              !string.IsNullOrWhiteSpace(email_TB.Text) &&
                               comboBoxSubject.SelectedItem != null &&
                               checkBox1.Checked;
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void email_TB_Leave(object sender, EventArgs e)
         {
-            if (CheckUser())
+            // Регулярное выражение для проверки email
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+            // Проверка введенного значения
+            if (!Regex.IsMatch(email_TB.Text, emailPattern))
             {
-                return;
+                // Вывод сообщения об ошибке
+                MessageBox.Show("Ошибка: Введенные данные не являются корректным email-адресом.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Очистка поля
+                email_TB.Clear();
+            }
+        }
+
+        private void dateStudent_DTP_ValueChanged(object sender, EventArgs e)
+        {
+            // Получаем выбранную дату рождения
+            DateTime selectedDate = dateStudent_DTP.Value;
+
+            // Вычисляем возраст
+            int age = DateTime.Now.Year - selectedDate.Year;
+            if (DateTime.Now.Date < selectedDate.AddYears(age)) // Проверяем, был ли день рождения в этом году
+            {
+                age--;
             }
 
-            var login = textBox_login.Text;
-            var password = textBox_password2.Text;
+            // Проверка возраста
+            if (age < 14)
+            {
+                MessageBox.Show("Вы слишком малы для регистрации на данный учебный центр (возраст менее 14 лет).",
+                                "Ошибка возраста",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+
+                // Сбрасываем дату на сегодняшнюю
+                dateStudent_DTP.Value = DateTime.Now.Date;
+            }
+            else
+            {
+                // Генерация чисел для умножения
+                Random random = new Random();
+                int number1 = random.Next(1, 10); // Число от 1 до 9
+                int number2 = random.Next(1, 10);
+
+                // Задаем вопрос пользователю
+                string question = $"Для подтверждения возраста решите пример: {number1} x {number2} = ?";
+                string input = Microsoft.VisualBasic.Interaction.InputBox(question,
+                                    "Подтверждение возраста",
+                                    "");
+
+                // Проверка ответа
+                if (int.TryParse(input, out int result) && result == number1 * number2)
+                {
+                    MessageBox.Show("Возраст успешно подтвержден!",
+                                    "Подтверждение",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный ответ. Регистрация невозможна.",
+                                    "Ошибка подтверждения",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+
+                    // Сбрасываем дату на сегодняшнюю
+                    dateStudent_DTP.Value = DateTime.Now.Date;
+                }
+            }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            var FIO = FIO_Student_TB.Text;
+
+            DateTime selectedDate = dateStudent_DTP.Value;
+            string date = selectedDate.ToString("dd.MM.yyyy");
+            
+            var numberPhone = nuberPhone_TB.Text;
+            var email = email_TB.Text;
             var subject = comboBoxSubject.SelectedItem?.ToString();
 
-            const string query = "INSERT INTO register (login_user, password_user, subject_user, status_user) VALUES (@login, @password, @subject, 'учащийся')";
+            const string query = "INSERT INTO Student (id_User, FIO, Date_Birth, Number_Phone, Email_adress, Predmet) " +
+                                 "VALUES (null, @FIO, @DateStudent, @PhoneNumber, @Email, @Predmet)";
+            
             using (var command = new SqlCommand(query, _dataBase.GetConnection()))
             {
-                command.Parameters.AddWithValue("@login", login);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@subject", subject);
+                command.Parameters.AddWithValue("@FIO", FIO);
+                command.Parameters.AddWithValue("@DateStudent", date);
+                command.Parameters.AddWithValue("@PhoneNumber", numberPhone);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Predmet", subject);
 
                 _dataBase.openConnection();
 
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    MessageBox.Show("Аккаунт был успешно создан!", $"Добро пожаловать, пользователь {login}!");
-                    var frmLogin = new LoginUp_Form();
-                    Hide();
-                    frmLogin.Show();
+                    MessageBox.Show("Пожалуйста ожидайте дальнейшей информации на почту которую вы указали при регистрации!", 
+                                    $"Ваша заявка успешно отправлена!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Аккаунт не был успешно создан!", "Ошибка регистрации!");
+                    MessageBox.Show("Возникла ошибка при регистрации!", "Ошибка регистрации!");
                 }
 
                 _player.controls.stop();
@@ -92,81 +177,10 @@ namespace RepetBase_App
             }
         }
 
-        private void ButtonClear_Click(object sender, EventArgs e)
-        {
-            textBox_login.Clear();
-            textBox_password2.Clear();
-        }
-
-        private bool CheckUser()
-        {
-            var loginUser = textBox_login.Text;
-            var passUser = textBox_password2.Text;
-
-            const string query = "SELECT id_user FROM register WHERE login_user = @login AND password_user = @password";
-            using (var command = new SqlCommand(query, _dataBase.GetConnection()))
-            {
-                command.Parameters.AddWithValue("@login", loginUser);
-                command.Parameters.AddWithValue("@password", passUser);
-
-                var adapter = new SqlDataAdapter(command);
-                var table = new DataTable();
-                adapter.Fill(table);
-
-                if (table.Rows.Count > 0)
-                {
-                    MessageBox.Show("Пользователь уже зарегистрирован!", "Ошибка!");
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        private void LogInLoad(object sender, EventArgs e)
-        {
-            textBox_password2.UseSystemPasswordChar = true;
-            textBox_password2.MaxLength = 50;
-
-            comboBoxSubject.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        private void PictureBoxTogglePassword_Click(object sender, EventArgs e)
-        {
-            // Переключаем режим отображения текста в TextBox
-            if (textBox_password2.UseSystemPasswordChar)
-            {
-                // Показать пароль
-                textBox_password2.UseSystemPasswordChar = false;
-                ButtonShow.Image = Properties.Resources.open; // Установите иконку открытого глаза
-            }
-            else
-            {
-                // Скрыть пароль
-                textBox_password2.UseSystemPasswordChar = true;
-                ButtonShow.Image = Properties.Resources.close; // Установите иконку закрытого глаза
-            }
-        }
-
         private void signUp_FormClosed(object sender, FormClosedEventArgs e)
         {
             _dataBase.closeConnection();
             _player.controls.stop();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            button1.Enabled = !string.IsNullOrWhiteSpace(textBox_login.Text) &&
-                              !string.IsNullOrWhiteSpace(textBox_password2.Text) &&
-                              comboBoxSubject.SelectedItem != null &&
-                              checkBox1.Checked;
-        }
-
-        private void signUp_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            var frmLogin = new LoginUp_Form();
-            _player.controls.stop();
-            Hide();
-            frmLogin.Show();
         }
     }
 }

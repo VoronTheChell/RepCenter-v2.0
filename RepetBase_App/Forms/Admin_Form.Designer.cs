@@ -35,6 +35,8 @@
             this.выйтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.информацияДляАдминовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PaymentTab = new System.Windows.Forms.TabPage();
+            this.buttonSend = new System.Windows.Forms.Button();
+            this.printCheck_button = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.PayStatus_CB = new System.Windows.Forms.ComboBox();
             this.PayTeacher_CB = new System.Windows.Forms.ComboBox();
@@ -88,6 +90,7 @@
             this.DataLearnDGV = new System.Windows.Forms.DataGridView();
             this.buttonDel4 = new System.Windows.Forms.Button();
             this.RepetTab = new System.Windows.Forms.TabPage();
+            this.buttonPinTeacher = new System.Windows.Forms.Button();
             this.PridmetTeacher_CB = new System.Windows.Forms.ComboBox();
             this.RepNumberPhone_TBM = new System.Windows.Forms.MaskedTextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -106,6 +109,7 @@
             this.TeacherDGV = new System.Windows.Forms.DataGridView();
             this.buttonDel3 = new System.Windows.Forms.Button();
             this.SrudentTab = new System.Windows.Forms.TabPage();
+            this.buttonAddUser = new System.Windows.Forms.Button();
             this.Pridmets_CB = new System.Windows.Forms.ComboBox();
             this.StudentNumberPhone_TBM = new System.Windows.Forms.MaskedTextBox();
             this.StudentDataTime_TBM = new System.Windows.Forms.MaskedTextBox();
@@ -143,10 +147,8 @@
             this.buttonDel = new System.Windows.Forms.Button();
             this.TabMenu = new System.Windows.Forms.TabControl();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.listBoxLogs = new System.Windows.Forms.ListBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.emailValues_TB = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.PaymentTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -179,8 +181,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClearButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDGV)).BeginInit();
             this.TabMenu.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -190,7 +190,7 @@
             this.информацияДляАдминовToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1787, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1285, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -225,6 +225,8 @@
             // 
             // PaymentTab
             // 
+            this.PaymentTab.Controls.Add(this.buttonSend);
+            this.PaymentTab.Controls.Add(this.printCheck_button);
             this.PaymentTab.Controls.Add(this.label8);
             this.PaymentTab.Controls.Add(this.PayStatus_CB);
             this.PaymentTab.Controls.Add(this.PayTeacher_CB);
@@ -244,13 +246,35 @@
             this.PaymentTab.Controls.Add(this.panel6);
             this.PaymentTab.Controls.Add(this.PaymentDGV);
             this.PaymentTab.Controls.Add(this.buttonDel6);
-            this.PaymentTab.Location = new System.Drawing.Point(4, 22);
+            this.PaymentTab.Location = new System.Drawing.Point(4, 25);
             this.PaymentTab.Name = "PaymentTab";
             this.PaymentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PaymentTab.Size = new System.Drawing.Size(1253, 584);
+            this.PaymentTab.Size = new System.Drawing.Size(1253, 579);
             this.PaymentTab.TabIndex = 5;
             this.PaymentTab.Text = "Статистика Оплаты Занятий";
             this.PaymentTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonSend
+            // 
+            this.buttonSend.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSend.Location = new System.Drawing.Point(476, 523);
+            this.buttonSend.Name = "buttonSend";
+            this.buttonSend.Size = new System.Drawing.Size(422, 49);
+            this.buttonSend.TabIndex = 33;
+            this.buttonSend.Text = "Отправить чек";
+            this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
+            // 
+            // printCheck_button
+            // 
+            this.printCheck_button.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.printCheck_button.Location = new System.Drawing.Point(6, 523);
+            this.printCheck_button.Name = "printCheck_button";
+            this.printCheck_button.Size = new System.Drawing.Size(464, 49);
+            this.printCheck_button.TabIndex = 6;
+            this.printCheck_button.Text = "Распечатать чек";
+            this.printCheck_button.UseVisualStyleBackColor = true;
+            this.printCheck_button.Click += new System.EventHandler(this.printCheck_button_Click);
             // 
             // label8
             // 
@@ -298,7 +322,6 @@
             this.Data_Pay_DTP.Name = "Data_Pay_DTP";
             this.Data_Pay_DTP.Size = new System.Drawing.Size(342, 35);
             this.Data_Pay_DTP.TabIndex = 25;
-            this.Data_Pay_DTP.ValueChanged += new System.EventHandler(this.Data_Pay_DTP_ValueChanged);
             // 
             // label28
             // 
@@ -385,9 +408,9 @@
             // 
             // buttonChange6
             // 
-            this.buttonChange6.Location = new System.Drawing.Point(902, 527);
+            this.buttonChange6.Location = new System.Drawing.Point(904, 523);
             this.buttonChange6.Name = "buttonChange6";
-            this.buttonChange6.Size = new System.Drawing.Size(343, 45);
+            this.buttonChange6.Size = new System.Drawing.Size(343, 49);
             this.buttonChange6.TabIndex = 9;
             this.buttonChange6.Text = "Изменить запись";
             this.buttonChange6.UseVisualStyleBackColor = true;
@@ -443,7 +466,7 @@
             this.PaymentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PaymentDGV.Location = new System.Drawing.Point(6, 72);
             this.PaymentDGV.Name = "PaymentDGV";
-            this.PaymentDGV.Size = new System.Drawing.Size(892, 501);
+            this.PaymentDGV.Size = new System.Drawing.Size(892, 445);
             this.PaymentDGV.TabIndex = 5;
             this.PaymentDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PaymentDGV_CellClick);
             // 
@@ -467,10 +490,10 @@
             this.SubjectTab.Controls.Add(this.panel5);
             this.SubjectTab.Controls.Add(this.LearnThemeDGV);
             this.SubjectTab.Controls.Add(this.buttonDel5);
-            this.SubjectTab.Location = new System.Drawing.Point(4, 22);
+            this.SubjectTab.Location = new System.Drawing.Point(4, 25);
             this.SubjectTab.Name = "SubjectTab";
             this.SubjectTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SubjectTab.Size = new System.Drawing.Size(1253, 584);
+            this.SubjectTab.Size = new System.Drawing.Size(1253, 579);
             this.SubjectTab.TabIndex = 4;
             this.SubjectTab.Text = "Предметы для учёбы";
             this.SubjectTab.UseVisualStyleBackColor = true;
@@ -516,9 +539,10 @@
             // 
             // buttonNew5
             // 
+            this.buttonNew5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonNew5.Location = new System.Drawing.Point(904, 442);
             this.buttonNew5.Name = "buttonNew5";
-            this.buttonNew5.Size = new System.Drawing.Size(343, 45);
+            this.buttonNew5.Size = new System.Drawing.Size(343, 75);
             this.buttonNew5.TabIndex = 6;
             this.buttonNew5.Text = "Новая запись";
             this.buttonNew5.UseVisualStyleBackColor = true;
@@ -570,9 +594,10 @@
             // 
             // buttonDel5
             // 
-            this.buttonDel5.Location = new System.Drawing.Point(903, 376);
+            this.buttonDel5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDel5.Location = new System.Drawing.Point(903, 364);
             this.buttonDel5.Name = "buttonDel5";
-            this.buttonDel5.Size = new System.Drawing.Size(344, 45);
+            this.buttonDel5.Size = new System.Drawing.Size(344, 72);
             this.buttonDel5.TabIndex = 8;
             this.buttonDel5.Text = "Удалить запись";
             this.buttonDel5.UseVisualStyleBackColor = true;
@@ -597,10 +622,10 @@
             this.ScheduleTab.Controls.Add(this.panel4);
             this.ScheduleTab.Controls.Add(this.DataLearnDGV);
             this.ScheduleTab.Controls.Add(this.buttonDel4);
-            this.ScheduleTab.Location = new System.Drawing.Point(4, 22);
+            this.ScheduleTab.Location = new System.Drawing.Point(4, 25);
             this.ScheduleTab.Name = "ScheduleTab";
             this.ScheduleTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ScheduleTab.Size = new System.Drawing.Size(1253, 584);
+            this.ScheduleTab.Size = new System.Drawing.Size(1253, 579);
             this.ScheduleTab.TabIndex = 3;
             this.ScheduleTab.Text = "Рассписание";
             this.ScheduleTab.UseVisualStyleBackColor = true;
@@ -725,7 +750,7 @@
             // 
             this.buttonChange4.Location = new System.Drawing.Point(904, 509);
             this.buttonChange4.Name = "buttonChange4";
-            this.buttonChange4.Size = new System.Drawing.Size(343, 45);
+            this.buttonChange4.Size = new System.Drawing.Size(343, 64);
             this.buttonChange4.TabIndex = 9;
             this.buttonChange4.Text = "Изменить запись";
             this.buttonChange4.UseVisualStyleBackColor = true;
@@ -735,7 +760,7 @@
             // 
             this.buttonNew4.Location = new System.Drawing.Point(904, 442);
             this.buttonNew4.Name = "buttonNew4";
-            this.buttonNew4.Size = new System.Drawing.Size(343, 45);
+            this.buttonNew4.Size = new System.Drawing.Size(343, 61);
             this.buttonNew4.TabIndex = 6;
             this.buttonNew4.Text = "Новая запись";
             this.buttonNew4.UseVisualStyleBackColor = true;
@@ -790,7 +815,7 @@
             // 
             this.buttonDel4.Location = new System.Drawing.Point(903, 376);
             this.buttonDel4.Name = "buttonDel4";
-            this.buttonDel4.Size = new System.Drawing.Size(344, 45);
+            this.buttonDel4.Size = new System.Drawing.Size(344, 60);
             this.buttonDel4.TabIndex = 8;
             this.buttonDel4.Text = "Удалить запись";
             this.buttonDel4.UseVisualStyleBackColor = true;
@@ -798,6 +823,7 @@
             // 
             // RepetTab
             // 
+            this.RepetTab.Controls.Add(this.buttonPinTeacher);
             this.RepetTab.Controls.Add(this.PridmetTeacher_CB);
             this.RepetTab.Controls.Add(this.RepNumberPhone_TBM);
             this.RepetTab.Controls.Add(this.label19);
@@ -813,13 +839,23 @@
             this.RepetTab.Controls.Add(this.panel3);
             this.RepetTab.Controls.Add(this.TeacherDGV);
             this.RepetTab.Controls.Add(this.buttonDel3);
-            this.RepetTab.Location = new System.Drawing.Point(4, 22);
+            this.RepetTab.Location = new System.Drawing.Point(4, 25);
             this.RepetTab.Name = "RepetTab";
             this.RepetTab.Padding = new System.Windows.Forms.Padding(3);
-            this.RepetTab.Size = new System.Drawing.Size(1253, 584);
+            this.RepetTab.Size = new System.Drawing.Size(1253, 579);
             this.RepetTab.TabIndex = 2;
             this.RepetTab.Text = "Репетиторы";
             this.RepetTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonPinTeacher
+            // 
+            this.buttonPinTeacher.Location = new System.Drawing.Point(904, 513);
+            this.buttonPinTeacher.Name = "buttonPinTeacher";
+            this.buttonPinTeacher.Size = new System.Drawing.Size(343, 60);
+            this.buttonPinTeacher.TabIndex = 27;
+            this.buttonPinTeacher.Text = "Привязать профиль";
+            this.buttonPinTeacher.UseVisualStyleBackColor = true;
+            this.buttonPinTeacher.Click += new System.EventHandler(this.buttonPinTeacher_Click);
             // 
             // PridmetTeacher_CB
             // 
@@ -915,7 +951,7 @@
             // 
             // buttonChange3
             // 
-            this.buttonChange3.Location = new System.Drawing.Point(904, 509);
+            this.buttonChange3.Location = new System.Drawing.Point(904, 462);
             this.buttonChange3.Name = "buttonChange3";
             this.buttonChange3.Size = new System.Drawing.Size(343, 45);
             this.buttonChange3.TabIndex = 9;
@@ -925,7 +961,7 @@
             // 
             // buttonNew3
             // 
-            this.buttonNew3.Location = new System.Drawing.Point(904, 442);
+            this.buttonNew3.Location = new System.Drawing.Point(904, 411);
             this.buttonNew3.Name = "buttonNew3";
             this.buttonNew3.Size = new System.Drawing.Size(343, 45);
             this.buttonNew3.TabIndex = 6;
@@ -979,7 +1015,7 @@
             // 
             // buttonDel3
             // 
-            this.buttonDel3.Location = new System.Drawing.Point(903, 376);
+            this.buttonDel3.Location = new System.Drawing.Point(903, 360);
             this.buttonDel3.Name = "buttonDel3";
             this.buttonDel3.Size = new System.Drawing.Size(344, 45);
             this.buttonDel3.TabIndex = 8;
@@ -989,6 +1025,9 @@
             // 
             // SrudentTab
             // 
+            this.SrudentTab.Controls.Add(this.label29);
+            this.SrudentTab.Controls.Add(this.emailValues_TB);
+            this.SrudentTab.Controls.Add(this.buttonAddUser);
             this.SrudentTab.Controls.Add(this.Pridmets_CB);
             this.SrudentTab.Controls.Add(this.StudentNumberPhone_TBM);
             this.SrudentTab.Controls.Add(this.StudentDataTime_TBM);
@@ -1004,19 +1043,29 @@
             this.SrudentTab.Controls.Add(this.panel2);
             this.SrudentTab.Controls.Add(this.StudentDGV);
             this.SrudentTab.Controls.Add(this.buttonDel2);
-            this.SrudentTab.Location = new System.Drawing.Point(4, 22);
+            this.SrudentTab.Location = new System.Drawing.Point(4, 25);
             this.SrudentTab.Name = "SrudentTab";
             this.SrudentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SrudentTab.Size = new System.Drawing.Size(1253, 584);
+            this.SrudentTab.Size = new System.Drawing.Size(1253, 579);
             this.SrudentTab.TabIndex = 1;
             this.SrudentTab.Text = "Студенты";
             this.SrudentTab.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddUser
+            // 
+            this.buttonAddUser.Location = new System.Drawing.Point(904, 538);
+            this.buttonAddUser.Name = "buttonAddUser";
+            this.buttonAddUser.Size = new System.Drawing.Size(342, 35);
+            this.buttonAddUser.TabIndex = 24;
+            this.buttonAddUser.Text = "Привязать профиль";
+            this.buttonAddUser.UseVisualStyleBackColor = true;
+            this.buttonAddUser.Click += new System.EventHandler(this.buttonAddUser_Click);
             // 
             // Pridmets_CB
             // 
             this.Pridmets_CB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.Pridmets_CB.FormattingEnabled = true;
-            this.Pridmets_CB.Location = new System.Drawing.Point(904, 317);
+            this.Pridmets_CB.Location = new System.Drawing.Point(903, 373);
             this.Pridmets_CB.Name = "Pridmets_CB";
             this.Pridmets_CB.Size = new System.Drawing.Size(343, 37);
             this.Pridmets_CB.TabIndex = 23;
@@ -1043,7 +1092,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(904, 301);
+            this.label15.Location = new System.Drawing.Point(903, 357);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(56, 13);
             this.label15.TabIndex = 20;
@@ -1108,9 +1157,9 @@
             // 
             // buttonChange2
             // 
-            this.buttonChange2.Location = new System.Drawing.Point(904, 509);
+            this.buttonChange2.Location = new System.Drawing.Point(903, 503);
             this.buttonChange2.Name = "buttonChange2";
-            this.buttonChange2.Size = new System.Drawing.Size(343, 45);
+            this.buttonChange2.Size = new System.Drawing.Size(343, 29);
             this.buttonChange2.TabIndex = 9;
             this.buttonChange2.Text = "Изменить запись";
             this.buttonChange2.UseVisualStyleBackColor = true;
@@ -1118,9 +1167,9 @@
             // 
             // buttonNew2
             // 
-            this.buttonNew2.Location = new System.Drawing.Point(904, 442);
+            this.buttonNew2.Location = new System.Drawing.Point(903, 459);
             this.buttonNew2.Name = "buttonNew2";
-            this.buttonNew2.Size = new System.Drawing.Size(343, 45);
+            this.buttonNew2.Size = new System.Drawing.Size(343, 38);
             this.buttonNew2.TabIndex = 6;
             this.buttonNew2.Text = "Новая запись";
             this.buttonNew2.UseVisualStyleBackColor = true;
@@ -1172,9 +1221,9 @@
             // 
             // buttonDel2
             // 
-            this.buttonDel2.Location = new System.Drawing.Point(903, 376);
+            this.buttonDel2.Location = new System.Drawing.Point(903, 422);
             this.buttonDel2.Name = "buttonDel2";
-            this.buttonDel2.Size = new System.Drawing.Size(344, 45);
+            this.buttonDel2.Size = new System.Drawing.Size(343, 31);
             this.buttonDel2.TabIndex = 8;
             this.buttonDel2.Text = "Удалить запись";
             this.buttonDel2.UseVisualStyleBackColor = true;
@@ -1197,14 +1246,13 @@
             this.UserTab.Controls.Add(this.panel1);
             this.UserTab.Controls.Add(this.UsersDGV);
             this.UserTab.Controls.Add(this.buttonDel);
-            this.UserTab.Location = new System.Drawing.Point(4, 22);
+            this.UserTab.Location = new System.Drawing.Point(4, 25);
             this.UserTab.Name = "UserTab";
             this.UserTab.Padding = new System.Windows.Forms.Padding(3);
-            this.UserTab.Size = new System.Drawing.Size(1253, 584);
+            this.UserTab.Size = new System.Drawing.Size(1253, 579);
             this.UserTab.TabIndex = 0;
             this.UserTab.Text = "Пользователи";
             this.UserTab.UseVisualStyleBackColor = true;
-            this.UserTab.Click += new System.EventHandler(this.UserTab_Click);
             // 
             // TypeOfUser_CB
             // 
@@ -1214,7 +1262,7 @@
             "admin ",
             "учащийся",
             "учитель"});
-            this.TypeOfUser_CB.Location = new System.Drawing.Point(903, 317);
+            this.TypeOfUser_CB.Location = new System.Drawing.Point(903, 320);
             this.TypeOfUser_CB.Name = "TypeOfUser_CB";
             this.TypeOfUser_CB.Size = new System.Drawing.Size(344, 37);
             this.TypeOfUser_CB.TabIndex = 17;
@@ -1223,7 +1271,7 @@
             // 
             this.Users_Primary_CB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.Users_Primary_CB.FormattingEnabled = true;
-            this.Users_Primary_CB.Location = new System.Drawing.Point(904, 259);
+            this.Users_Primary_CB.Location = new System.Drawing.Point(904, 262);
             this.Users_Primary_CB.Name = "Users_Primary_CB";
             this.Users_Primary_CB.Size = new System.Drawing.Size(342, 37);
             this.Users_Primary_CB.TabIndex = 16;
@@ -1231,7 +1279,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(904, 301);
+            this.label11.Location = new System.Drawing.Point(904, 304);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(105, 13);
             this.label11.TabIndex = 15;
@@ -1240,7 +1288,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(904, 243);
+            this.label10.Location = new System.Drawing.Point(904, 246);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 13);
             this.label10.TabIndex = 14;
@@ -1249,7 +1297,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(904, 186);
+            this.label9.Location = new System.Drawing.Point(904, 189);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(126, 13);
             this.label9.TabIndex = 13;
@@ -1258,7 +1306,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(904, 127);
+            this.label7.Location = new System.Drawing.Point(904, 130);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(119, 13);
             this.label7.TabIndex = 11;
@@ -1267,7 +1315,7 @@
             // UserPass_TB
             // 
             this.UserPass_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.UserPass_TB.Location = new System.Drawing.Point(903, 202);
+            this.UserPass_TB.Location = new System.Drawing.Point(903, 205);
             this.UserPass_TB.Name = "UserPass_TB";
             this.UserPass_TB.Size = new System.Drawing.Size(343, 35);
             this.UserPass_TB.TabIndex = 8;
@@ -1275,7 +1323,7 @@
             // UserLogin_TB
             // 
             this.UserLogin_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.UserLogin_TB.Location = new System.Drawing.Point(903, 143);
+            this.UserLogin_TB.Location = new System.Drawing.Point(903, 146);
             this.UserLogin_TB.Name = "UserLogin_TB";
             this.UserLogin_TB.Size = new System.Drawing.Size(343, 35);
             this.UserLogin_TB.TabIndex = 7;
@@ -1304,9 +1352,9 @@
             // 
             // buttonChange
             // 
-            this.buttonChange.Location = new System.Drawing.Point(904, 509);
+            this.buttonChange.Location = new System.Drawing.Point(903, 509);
             this.buttonChange.Name = "buttonChange";
-            this.buttonChange.Size = new System.Drawing.Size(343, 45);
+            this.buttonChange.Size = new System.Drawing.Size(343, 64);
             this.buttonChange.TabIndex = 3;
             this.buttonChange.Text = "Изменить запись";
             this.buttonChange.UseVisualStyleBackColor = true;
@@ -1316,7 +1364,7 @@
             // 
             this.buttonNew.Location = new System.Drawing.Point(904, 442);
             this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Size = new System.Drawing.Size(343, 45);
+            this.buttonNew.Size = new System.Drawing.Size(342, 61);
             this.buttonNew.TabIndex = 1;
             this.buttonNew.Text = "Новая запись";
             this.buttonNew.UseVisualStyleBackColor = true;
@@ -1370,7 +1418,7 @@
             // 
             this.buttonDel.Location = new System.Drawing.Point(903, 376);
             this.buttonDel.Name = "buttonDel";
-            this.buttonDel.Size = new System.Drawing.Size(344, 45);
+            this.buttonDel.Size = new System.Drawing.Size(343, 60);
             this.buttonDel.TabIndex = 2;
             this.buttonDel.Text = "Удалить запись";
             this.buttonDel.UseVisualStyleBackColor = true;
@@ -1387,7 +1435,7 @@
             this.TabMenu.Location = new System.Drawing.Point(12, 27);
             this.TabMenu.Name = "TabMenu";
             this.TabMenu.SelectedIndex = 0;
-            this.TabMenu.Size = new System.Drawing.Size(1261, 610);
+            this.TabMenu.Size = new System.Drawing.Size(1261, 608);
             this.TabMenu.TabIndex = 0;
             this.TabMenu.Click += new System.EventHandler(this.ClearButton4_Click);
             // 
@@ -1396,55 +1444,29 @@
             this.saveFileDialog1.FileName = "TestTableSavePdf";
             this.saveFileDialog1.Filter = "PDF(*.pdf)|*.pdf";
             // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.listBoxLogs);
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(1279, 27);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(496, 606);
-            this.panel7.TabIndex = 6;
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.White;
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel8.Controls.Add(this.label29);
-            this.panel8.Location = new System.Drawing.Point(13, 6);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(469, 49);
-            this.panel8.TabIndex = 0;
-            // 
-            // listBoxLogs
-            // 
-            this.listBoxLogs.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxLogs.FormattingEnabled = true;
-            this.listBoxLogs.HorizontalScrollbar = true;
-            this.listBoxLogs.ItemHeight = 17;
-            this.listBoxLogs.Location = new System.Drawing.Point(13, 62);
-            this.listBoxLogs.Name = "listBoxLogs";
-            this.listBoxLogs.Size = new System.Drawing.Size(469, 514);
-            this.listBoxLogs.TabIndex = 1;
-            // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label29.Location = new System.Drawing.Point(207, 11);
+            this.label29.Location = new System.Drawing.Point(905, 302);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(72, 25);
-            this.label29.TabIndex = 0;
-            this.label29.Text = "ЛОГГИ";
+            this.label29.Size = new System.Drawing.Size(43, 13);
+            this.label29.TabIndex = 26;
+            this.label29.Text = "Почта:";
+            // 
+            // emailValues_TB
+            // 
+            this.emailValues_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.emailValues_TB.Location = new System.Drawing.Point(904, 318);
+            this.emailValues_TB.Name = "emailValues_TB";
+            this.emailValues_TB.Size = new System.Drawing.Size(343, 35);
+            this.emailValues_TB.TabIndex = 25;
             // 
             // Admin_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1787, 647);
+            this.ClientSize = new System.Drawing.Size(1285, 647);
             this.ControlBox = false;
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.TabMenu);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -1491,9 +1513,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClearButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDGV)).EndInit();
             this.TabMenu.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1614,9 +1633,11 @@
         private System.Windows.Forms.ComboBox PayScoller_CB;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox PayStatus_CB;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.ListBox listBoxLogs;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Button printCheck_button;
+        private System.Windows.Forms.Button buttonSend;
+        private System.Windows.Forms.Button buttonAddUser;
+        private System.Windows.Forms.Button buttonPinTeacher;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox emailValues_TB;
     }
 }

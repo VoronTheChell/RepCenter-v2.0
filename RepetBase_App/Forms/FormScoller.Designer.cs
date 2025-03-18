@@ -30,10 +30,6 @@ namespace RepetBase_App
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.RepetitionPage = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TimeOfWorkPage = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,9 +43,6 @@ namespace RepetBase_App
             this.выходИзПрофиляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаДляУченикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
-            this.RepetitionPage.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.TimeOfWorkPage.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -61,7 +54,6 @@ namespace RepetBase_App
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.RepetitionPage);
             this.tabControl1.Controls.Add(this.TimeOfWorkPage);
             this.tabControl1.Controls.Add(this.PaymentPage);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
@@ -69,46 +61,6 @@ namespace RepetBase_App
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1150, 706);
             this.tabControl1.TabIndex = 6;
-            // 
-            // RepetitionPage
-            // 
-            this.RepetitionPage.Controls.Add(this.panel2);
-            this.RepetitionPage.Controls.Add(this.dataGridView1);
-            this.RepetitionPage.Location = new System.Drawing.Point(4, 25);
-            this.RepetitionPage.Name = "RepetitionPage";
-            this.RepetitionPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RepetitionPage.Size = new System.Drawing.Size(1142, 677);
-            this.RepetitionPage.TabIndex = 0;
-            this.RepetitionPage.Text = "Репетиторы";
-            this.RepetitionPage.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(0, 1);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1138, 77);
-            this.panel2.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(6, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(280, 38);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Страница: Репетиторы";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 83);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1138, 588);
-            this.dataGridView1.TabIndex = 0;
             // 
             // TimeOfWorkPage
             // 
@@ -211,14 +163,14 @@ namespace RepetBase_App
             // выходИзПрофиляToolStripMenuItem
             // 
             this.выходИзПрофиляToolStripMenuItem.Name = "выходИзПрофиляToolStripMenuItem";
-            this.выходИзПрофиляToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.выходИзПрофиляToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.выходИзПрофиляToolStripMenuItem.Text = "Выход из профиля...";
             this.выходИзПрофиляToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
             // 
             // справкаДляУченикаToolStripMenuItem
             // 
             this.справкаДляУченикаToolStripMenuItem.Name = "справкаДляУченикаToolStripMenuItem";
-            this.справкаДляУченикаToolStripMenuItem.Size = new System.Drawing.Size(143, 20);
+            this.справкаДляУченикаToolStripMenuItem.Size = new System.Drawing.Size(139, 20);
             this.справкаДляУченикаToolStripMenuItem.Text = "Справка для Ученика!";
             // 
             // FormScoller
@@ -235,9 +187,6 @@ namespace RepetBase_App
             this.Text = "Добро пожаловать ученик!";
             this.Load += new System.EventHandler(this.FormScoller_Load);
             this.tabControl1.ResumeLayout(false);
-            this.RepetitionPage.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.TimeOfWorkPage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -254,20 +203,16 @@ namespace RepetBase_App
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage RepetitionPage;
         private System.Windows.Forms.TabPage TimeOfWorkPage;
         private System.Windows.Forms.TabPage PaymentPage;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходИзПрофиляToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаДляУченикаToolStripMenuItem;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
     }

@@ -3,23 +3,32 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
+using System.Net.Mail;
+using System.Net;
+using RepetBase_App.Forms;
+
 using Aspose.Pdf;
+using Aspose.Pdf.Text;
+using Aspose.Pdf.Drawing;
 
 namespace RepetBase_App
 {
 
     public partial class Admin_Form : Form
     {
-        DataBase dataBase = new DataBase();
+        private readonly DataBase dataBase = new DataBase();
 
-        DataTable dataTable = new DataTable();
+        private readonly DataTable dataTable = new DataTable();
 
-        private DataTable paymentDataTable;
+        DataTable paymentDataTable;
 
         int selectdRow;
+
         public int id_users, id_student, 
                    id_teacher, id_raspisanie, 
                    id_pridmet, id_payment;
+
         public bool Clear_Funk = false;
 
         public Admin_Form()
@@ -56,17 +65,24 @@ namespace RepetBase_App
 
         private void CreateColumns()
         {
-            FillDataGridView("SELECT id_User AS 'ID', login_user AS 'Логин пользователей', password_user AS 'Пароли', subject_user AS 'Предметы', status_user AS 'Тип пользователя' FROM register", UsersDGV);
+            FillDataGridView("SELECT id_User AS 'ID', login_user AS 'Логин пользователей', password_user AS 'Пароли', subject_user AS 'Предметы', " +
+                             "status_user AS 'Тип пользователя' FROM register", UsersDGV);
 
-            FillDataGridView("SELECT student_id AS 'ID', FIO AS 'ФИО', Date_Birth AS 'Дата рождения', Number_Phone AS 'Номер телефона', Predmet AS 'Предмет' FROM Student", StudentDGV);
+            FillDataGridView("SELECT student_id AS 'ID', FIO AS 'ФИО', Date_Birth AS 'Дата рождения', Number_Phone AS 'Номер телефона', " +
+                             "Email_adress AS 'Почта', Predmet AS 'Предмет' FROM Student", StudentDGV);
 
-            FillDataGridView("SELECT tutor_id AS 'ID', FIO AS 'ФИО', Phone_Number AS 'Номер телефона', Kvalification AS 'Квалификация', Predmets AS 'Предмет' FROM Repetitors", TeacherDGV);
+            FillDataGridView("SELECT tutor_id AS 'ID', FIO AS 'ФИО', Phone_Number AS 'Номер телефона', Kvalification AS 'Квалификация', " +
+                             "Predmets AS 'Предмет' FROM Repetitors", TeacherDGV);
 
-            FillDataGridView("SELECT r.schedule_id AS 'ID', s.FIO AS 'Ученик', t.FIO AS 'Учитель', r.Time_Learn AS 'Время начала занятия', r.Learn_Status AS 'Статус занятия' FROM Raspisanie_Zaniyatiy r JOIN Student s ON r.student_id = s.student_id JOIN Repetitors t ON r.tutor_id = t.tutor_id", DataLearnDGV);
+            FillDataGridView("SELECT r.schedule_id AS 'ID', s.FIO AS 'Ученик', t.FIO AS 'Учитель', r.Time_Learn AS 'Время начала занятия', " +
+                             "r.Learn_Status AS 'Статус занятия' FROM Raspisanie_Zaniyatiy r JOIN Student s ON r.student_id = s.student_id " +
+                             "JOIN Repetitors t ON r.tutor_id = t.tutor_id", DataLearnDGV);
             
             FillDataGridView("SELECT subject_id AS 'ID', Name_Pridment AS 'Названия предмета' FROM Pridments", LearnThemeDGV);
 
-            FillDataGridView("SELECT p.payment_id AS 'ID', s.FIO AS 'Студент', t.FIO AS 'Репетитор', p.Date_of_Payment AS 'Дата оплаты', p.Summ_Payment AS 'Сумма оплаты', p.Status_Pay AS 'Статус оплаты' FROM Payment p JOIN Student s ON p.student_id = s.student_id JOIN Repetitors t ON p.tutor_id = t.tutor_id;", PaymentDGV);
+            FillDataGridView("SELECT p.payment_id AS 'ID', s.FIO AS 'Студент', t.FIO AS 'Репетитор', p.Date_of_Payment AS 'Дата оплаты', " +
+                             "p.Summ_Payment AS 'Сумма оплаты', p.Status_Pay AS 'Статус оплаты' FROM Payment p JOIN Student s ON p.student_id = s.student_id " +
+                             "JOIN Repetitors t ON p.tutor_id = t.tutor_id;", PaymentDGV);
         }
 
         private void LoadScheduleData()
@@ -86,7 +102,6 @@ namespace RepetBase_App
             }
         }
         
-
         private void LoadPaymentData()
         {
             // Загружаем данные из базы данных один раз и сохраняем в DataTable
@@ -136,52 +151,6 @@ namespace RepetBase_App
                 dataGridView.AutoResizeColumns();
             }
             dataBase.closeConnection();
-        }
-
-        private void UpdateLogListBox(string logMessage)
-        {
-            if (listBoxLogs.InvokeRequired)
-            {
-                listBoxLogs.Invoke(new Action(() => listBoxLogs.Items.Add(logMessage)));
-            }
-            else
-            {
-                listBoxLogs.Items.Add(logMessage);
-            }
-
-            // Автоматическая прокрутка к последнему элементу
-            listBoxLogs.TopIndex = listBoxLogs.Items.Count - 1;
-        }
-
-
-        public void AddLog(string tableName, string action, string details, int? userId = null)
-        {
-            string query = "INSERT INTO log_table (log_date, user_id, table_name, action, details) VALUES (GETDATE(), @UserID, @TableName, @Action, @Details)";
-
-            try
-            {
-                dataBase.openConnection();
-                using (SqlCommand command = new SqlCommand(query, dataBase.GetConnection()))
-                {
-                    command.Parameters.AddWithValue("@UserID", 1);
-                    command.Parameters.AddWithValue("@TableName", tableName);
-                    command.Parameters.AddWithValue("@Action", action);
-                    command.Parameters.AddWithValue("@Details", details);
-
-                    command.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при записи лога: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                dataBase.closeConnection();
-            }
-
-            // Обновляем ListBox
-            UpdateLogListBox($"{DateTime.Now}: {action} в таблице {tableName} - {details}");
         }
 
         private int GetIDByNameStudent(string selectedName)
@@ -254,7 +223,6 @@ namespace RepetBase_App
 
             return id_teacher;
         }
-
 
         public void LoadScoolersToComboBox()
         {
@@ -396,7 +364,6 @@ namespace RepetBase_App
             if (string.IsNullOrEmpty(UserLogin_TB.Text) || string.IsNullOrEmpty(UserPass_TB.Text) || string.IsNullOrEmpty(Users_Primary_CB.Text) || string.IsNullOrEmpty(TypeOfUser_CB.Text))
             {
                 MessageBox.Show("Отсутсвует выбранная запись для удаления!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                AddLog("register", "Удаление - ОТМЕНА", $"Действие отменено, тк администратор не предоставил инфо. о выбранном пользователем!", 1);
                 return;
             }
 
@@ -409,12 +376,6 @@ namespace RepetBase_App
                 ClearUserFields();
                 CreateColumns();
                 MessageBox.Show("Запись успешно удалена!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                AddLog("register", "Удаление - УСПЕШНО", $"Пользователь {UserLogin_TB.Text}, был успешно удален с БД!", 1);
-            }
-
-            else
-            {
-                AddLog("register", "Удаление - ОТМЕНА", $"Действие было отменено администратором!", 1);
             }
         }
 
@@ -428,7 +389,6 @@ namespace RepetBase_App
                          ("@Status", TypeOfUser_CB.Text));
             ClearUserFields();
             CreateColumns();
-            AddLog("register", "Добавление - УСПЕШНО", $"Действие было отменено администратором!", 1);
             MessageBox.Show("Запись успешно создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -443,7 +403,6 @@ namespace RepetBase_App
                          ("@UserID", id_users));
             ClearUserFields();
             CreateColumns();
-            AddLog("register", "Изменение - УСПЕШНО", $"Был изменен пользователь по ID:{id_users}!", 1);
             MessageBox.Show("Запись успешно изменена!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
@@ -458,7 +417,7 @@ namespace RepetBase_App
         private void SearchApp2_ChangeText(object sender, EventArgs e)
         {
             string searchapString = "SELECT student_id AS 'ID', FIO AS 'ФИО', Date_Birth AS 'Дата рождения', " +
-                                    "Number_Phone AS 'Номер телефона', Predmet AS 'Предмет' " +
+                                    "Number_Phone AS 'Номер телефона', Email_adress AS 'Почта', Predmet AS 'Предмет' " +
                                     "FROM Student WHERE FIO LIKE @SearchText";
             SearchUp(searchapString, StudentDGV, ("@SearchText", "%" + textBox2.Text + "%"));
         }
@@ -508,12 +467,13 @@ namespace RepetBase_App
 
         private void buttonNew2_Click(object sender, EventArgs e)
         {
-            string addCommandString = "INSERT INTO Student (FIO, Date_Birth, Number_Phone, Predmet) " +
+            string addCommandString = "INSERT INTO Student (FIO, Date_Birth, Number_Phone, Email_adress, Predmet) " +
                                       "VALUES (@FIO, @DateBirth, @NumberPhone, @Predmet)";
             ExecuteQuery(addCommandString,
                          ("@FIO", FIO_Student_TB.Text),
                          ("@DateBirth", StudentDataTime_TBM.Text),
                          ("@NumberPhone", StudentNumberPhone_TBM.Text),
+                         ("@Email", emailValues_TB.Text),
                          ("@Predmet", Pridmets_CB.Text));
             ClearStudentFields();
             CreateColumns();
@@ -529,12 +489,15 @@ namespace RepetBase_App
                 return;
             }
 
-            string changeCommandString = "UPDATE Student SET FIO = @FIO, Date_Birth = @DateBirth, Number_Phone = @NumberPhone, Predmet = @Predmet WHERE student_id = @StudentID";
+            string changeCommandString = "UPDATE Student SET FIO = @FIO, Date_Birth = @DateBirth, Number_Phone = @NumberPhone, " +
+                                         "Email_adress = @Email, Predmet = @Predmet WHERE student_id = @StudentID";
             ExecuteQuery(changeCommandString,
                          ("@FIO", FIO_Student_TB.Text),
                          ("@DateBirth", StudentDataTime_TBM.Text),
                          ("@NumberPhone", StudentNumberPhone_TBM.Text),
+                         ("@Email", emailValues_TB.Text),
                          ("@Predmet", Pridmets_CB.Text),
+
                          ("@StudentID", id_student));
             ClearStudentFields();
             CreateColumns();
@@ -987,18 +950,6 @@ namespace RepetBase_App
             ClearPaymentFields();
         }
 
-        private void Data_Pay_DTP_ValueChanged(object sender, EventArgs e)
-        {
-            // Проверяем, что выбранная дата меньше текущей
-            if (Data_Pay_DTP.Value.Date < DateTime.Now.Date)
-            {
-                // Выводим сообщение об ошибке
-                MessageBox.Show("Ошибка: Нельзя выбрать дату в прошлом. Установлена текущая дата.", "Ошибка даты", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                // Устанавливаем сегодняшнюю дату
-                Data_Pay_DTP.Value = DateTime.Now.Date;
-            }
-        }
 
         private void DataZanytia_DTP_ValueChanged(object sender, EventArgs e)
         {
@@ -1018,9 +969,150 @@ namespace RepetBase_App
 
         }
 
-        private void UserTab_Click(object sender, EventArgs e)
+        private void printCheck_button_Click(object sender, EventArgs e)
         {
+            // Извлекаем данные из элементов управления
+            string scroller = PayScoller_CB.SelectedItem?.ToString() ?? "Не указано";
+            string teacher = PayTeacher_CB.SelectedItem?.ToString() ?? "Не указано";
+            DateTime paymentDate = Data_Pay_DTP.Value; // Извлечение значения из DateTimePicker
+            decimal amount;
 
+            // Проверка суммы
+            if (!decimal.TryParse(ValuesRUB_TB.Text, out amount))
+            {
+                MessageBox.Show("Введите корректную сумму!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Сохраняем чек
+            SaveBeautifulReceipt(scroller, "Администратор школы", "410056, г. Саратов, ул. им. Пугачева Е.И., д.72", "Оплата за обучение",
+                "Предоплата 100%", amount.ToString(), DateTime.Now.ToString("dd.MM.yyyy HH:mm"), "6");
+        }
+
+        public void SaveBeautifulReceipt(string cashierName, string adminRole, string organization,
+                         string serviceType, string paymentMethod, string paymentAmount,
+                         string paymentDate, string receiptNumber)
+        {
+            try
+            {
+                // Создаем документ PDF
+                Document pdfDocument = new Document();
+                Page page = pdfDocument.Pages.Add();
+
+                // Устанавливаем стиль страницы
+                page.PageInfo.Margin = new MarginInfo(20, 20, 20, 20);
+
+                // Добавляем заголовок
+                TextFragment header = new TextFragment($"КАССОВЫЙ ЧЕК № {receiptNumber}");
+                header.TextState.FontSize = 14;
+                header.TextState.FontStyle = FontStyles.Bold;
+                header.TextState.ForegroundColor = Aspose.Pdf.Color.Blue;
+                header.TextState.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Center;
+                page.Paragraphs.Add(header);
+
+                // Создаем объект Graph для линии
+                Graph graph = new Graph(500, 20); // Ширина и высота графической области
+                Line line = new Line(new float[] { 0, 0, 500, 0 })  // Координаты: от (0, 0) до (500, 0)
+                {
+                    GraphInfo = new GraphInfo
+                    {
+                        LineWidth = 1.5f,  // Толщина линии
+                        Color = Aspose.Pdf.Color.Gray  // Цвет линии
+                    }
+                };
+                graph.Shapes.Add(line);
+                page.Paragraphs.Add(graph);
+
+                // Добавляем дату и смену
+                TextFragment dateShiftInfo = new TextFragment($"Дата: {paymentDate}\nСмена: 1\nКассир: {cashierName}");
+                dateShiftInfo.TextState.FontSize = 10;
+                page.Paragraphs.Add(dateShiftInfo);
+
+                // Добавляем информацию об организации
+                TextFragment organizationInfo = new TextFragment($"{organization}\nОбразовательные услуги");
+                organizationInfo.TextState.FontSize = 10;
+                page.Paragraphs.Add(organizationInfo);
+
+                // Создаем объект Graph для линии
+                Graph graph2 = new Graph(500, 20); // Ширина и высота графической области
+                Line line2 = new Line(new float[] { 0, 0, 1500, 0 })  // Координаты: от (0, 0) до (500, 0)
+                {
+                    GraphInfo = new GraphInfo
+                    {
+                        LineWidth = 1.5f,  // Толщина линии
+                        Color = Aspose.Pdf.Color.Gray  // Цвет линии
+                    }
+                };
+                graph.Shapes.Add(line2);
+                page.Paragraphs.Add(graph2);
+
+                // Добавляем текст прихода
+                TextFragment incomeHeader = new TextFragment("ПРИХОД");
+                // Изменяем свойства существующего объекта TextState
+                incomeHeader.TextState.FontSize = 12;
+                incomeHeader.TextState.FontStyle = FontStyles.Bold;
+                incomeHeader.TextState.ForegroundColor = Aspose.Pdf.Color.Blue;
+                page.Paragraphs.Add(incomeHeader);
+
+                // Добавляем таблицу для деталей платежа
+                Table detailsTable = new Table
+                {
+                    ColumnWidths = "100 100",
+                    DefaultCellTextState = new TextState { FontSize = 10 }
+                };
+
+                // Заголовок таблицы
+                Row headerRow = detailsTable.Rows.Add();
+                headerRow.Cells.Add("Описание");
+                headerRow.Cells.Add("Сумма");
+
+                // Данные таблицы
+                Row dataRow1 = detailsTable.Rows.Add();
+                dataRow1.Cells.Add($"Пополнение счета: {serviceType}");
+                dataRow1.Cells.Add($"{paymentAmount} RUB");
+
+                Row dataRow2 = detailsTable.Rows.Add();
+                dataRow2.Cells.Add("ИТОГО:");
+                dataRow2.Cells.Add($"{paymentAmount} RUB");
+
+                page.Paragraphs.Add(detailsTable);
+
+                // Сохраняем чек
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                    saveFileDialog.Title = "Сохранить чек как...";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        pdfDocument.Save(saveFileDialog.FileName);
+                        MessageBox.Show("Чек успешно сохранен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении чека: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            SelectAndSendEmail selectAndSendEmail = new SelectAndSendEmail();
+            selectAndSendEmail.ShowDialog();            
+        }
+
+        private void buttonPinTeacher_Click(object sender, EventArgs e)
+        {
+            TeacherEvaluationForm teacherEvaluationForm = new TeacherEvaluationForm();
+            this.Hide();
+            teacherEvaluationForm.ShowDialog();
+            this.Show();
+        }
+
+        private void buttonAddUser_Click(object sender, EventArgs e)
+        {
+            SelectAndSendEmail selectAndSendEmail = new SelectAndSendEmail();
+            selectAndSendEmail.ShowDialog();
         }
 
         private void ValuesRUB_TB_TextChanged(object sender, EventArgs e)

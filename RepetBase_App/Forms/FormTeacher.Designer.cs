@@ -33,6 +33,7 @@ namespace RepetBase_App
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оценкаУспеваемостиУченикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выйтиИзПрофиляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -43,13 +44,11 @@ namespace RepetBase_App
             this.btn_Search = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TimeOfWorkPage = new System.Windows.Forms.TabPage();
-            this.SelectTeacher_CB = new System.Windows.Forms.ComboBox();
             this.SelectStudent_CB = new System.Windows.Forms.ComboBox();
             this.StatusZanytia_CB = new System.Windows.Forms.ComboBox();
             this.DateLearn_DTP = new System.Windows.Forms.DateTimePicker();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.buttonChange = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
@@ -92,6 +91,7 @@ namespace RepetBase_App
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сохранитьКакToolStripMenuItem,
+            this.оценкаУспеваемостиУченикаToolStripMenuItem,
             this.выйтиИзПрофиляToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -100,21 +100,28 @@ namespace RepetBase_App
             // сохранитьКакToolStripMenuItem
             // 
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
             this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
+            // 
+            // оценкаУспеваемостиУченикаToolStripMenuItem
+            // 
+            this.оценкаУспеваемостиУченикаToolStripMenuItem.Name = "оценкаУспеваемостиУченикаToolStripMenuItem";
+            this.оценкаУспеваемостиУченикаToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.оценкаУспеваемостиУченикаToolStripMenuItem.Text = "Оценка успеваемости ученика";
+            this.оценкаУспеваемостиУченикаToolStripMenuItem.Click += new System.EventHandler(this.оценкаУспеваемостиУченикаToolStripMenuItem_Click);
             // 
             // выйтиИзПрофиляToolStripMenuItem
             // 
             this.выйтиИзПрофиляToolStripMenuItem.Name = "выйтиИзПрофиляToolStripMenuItem";
-            this.выйтиИзПрофиляToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.выйтиИзПрофиляToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.выйтиИзПрофиляToolStripMenuItem.Text = "Выйти из профиля";
             this.выйтиИзПрофиляToolStripMenuItem.Click += new System.EventHandler(this.выйтиИзПрофиляToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // tabControl1
@@ -199,13 +206,11 @@ namespace RepetBase_App
             // 
             // TimeOfWorkPage
             // 
-            this.TimeOfWorkPage.Controls.Add(this.SelectTeacher_CB);
             this.TimeOfWorkPage.Controls.Add(this.SelectStudent_CB);
             this.TimeOfWorkPage.Controls.Add(this.StatusZanytia_CB);
             this.TimeOfWorkPage.Controls.Add(this.DateLearn_DTP);
             this.TimeOfWorkPage.Controls.Add(this.label23);
             this.TimeOfWorkPage.Controls.Add(this.label22);
-            this.TimeOfWorkPage.Controls.Add(this.label21);
             this.TimeOfWorkPage.Controls.Add(this.label20);
             this.TimeOfWorkPage.Controls.Add(this.buttonChange);
             this.TimeOfWorkPage.Controls.Add(this.buttonNew);
@@ -220,20 +225,11 @@ namespace RepetBase_App
             this.TimeOfWorkPage.Text = "Расписание занятия";
             this.TimeOfWorkPage.UseVisualStyleBackColor = true;
             // 
-            // SelectTeacher_CB
-            // 
-            this.SelectTeacher_CB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.SelectTeacher_CB.FormattingEnabled = true;
-            this.SelectTeacher_CB.Location = new System.Drawing.Point(780, 175);
-            this.SelectTeacher_CB.Name = "SelectTeacher_CB";
-            this.SelectTeacher_CB.Size = new System.Drawing.Size(315, 32);
-            this.SelectTeacher_CB.TabIndex = 32;
-            // 
             // SelectStudent_CB
             // 
             this.SelectStudent_CB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.SelectStudent_CB.FormattingEnabled = true;
-            this.SelectStudent_CB.Location = new System.Drawing.Point(780, 116);
+            this.SelectStudent_CB.Location = new System.Drawing.Point(780, 139);
             this.SelectStudent_CB.Name = "SelectStudent_CB";
             this.SelectStudent_CB.Size = new System.Drawing.Size(315, 32);
             this.SelectStudent_CB.TabIndex = 31;
@@ -247,7 +243,7 @@ namespace RepetBase_App
             "Занятие закончилось",
             "Занятие не состоялось",
             "Занятие не началось"});
-            this.StatusZanytia_CB.Location = new System.Drawing.Point(780, 295);
+            this.StatusZanytia_CB.Location = new System.Drawing.Point(780, 247);
             this.StatusZanytia_CB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.StatusZanytia_CB.Name = "StatusZanytia_CB";
             this.StatusZanytia_CB.Size = new System.Drawing.Size(315, 32);
@@ -256,7 +252,7 @@ namespace RepetBase_App
             // DateLearn_DTP
             // 
             this.DateLearn_DTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.DateLearn_DTP.Location = new System.Drawing.Point(780, 238);
+            this.DateLearn_DTP.Location = new System.Drawing.Point(780, 190);
             this.DateLearn_DTP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateLearn_DTP.Name = "DateLearn_DTP";
             this.DateLearn_DTP.Size = new System.Drawing.Size(315, 29);
@@ -265,7 +261,7 @@ namespace RepetBase_App
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(779, 280);
+            this.label23.Location = new System.Drawing.Point(779, 232);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(88, 13);
             this.label23.TabIndex = 28;
@@ -274,25 +270,16 @@ namespace RepetBase_App
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(780, 223);
+            this.label22.Location = new System.Drawing.Point(780, 175);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(121, 13);
             this.label22.TabIndex = 27;
             this.label22.Text = "Дата начала занятия:";
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(782, 159);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(52, 13);
-            this.label21.TabIndex = 26;
-            this.label21.Text = "Учетеля:";
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(781, 100);
+            this.label20.Location = new System.Drawing.Point(781, 123);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(59, 13);
             this.label20.TabIndex = 25;
@@ -300,7 +287,7 @@ namespace RepetBase_App
             // 
             // buttonChange
             // 
-            this.buttonChange.Location = new System.Drawing.Point(780, 599);
+            this.buttonChange.Location = new System.Drawing.Point(780, 503);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(315, 78);
             this.buttonChange.TabIndex = 18;
@@ -310,7 +297,7 @@ namespace RepetBase_App
             // 
             // buttonNew
             // 
-            this.buttonNew.Location = new System.Drawing.Point(780, 493);
+            this.buttonNew.Location = new System.Drawing.Point(780, 417);
             this.buttonNew.Name = "buttonNew";
             this.buttonNew.Size = new System.Drawing.Size(315, 80);
             this.buttonNew.TabIndex = 16;
@@ -320,7 +307,7 @@ namespace RepetBase_App
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(780, 368);
+            this.buttonDel.Location = new System.Drawing.Point(780, 315);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(315, 96);
             this.buttonDel.TabIndex = 17;
@@ -466,12 +453,11 @@ namespace RepetBase_App
         private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox StatusZanytia_CB;
         private System.Windows.Forms.DateTimePicker DateLearn_DTP;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.ComboBox SelectTeacher_CB;
         private System.Windows.Forms.ComboBox SelectStudent_CB;
+        private System.Windows.Forms.ToolStripMenuItem оценкаУспеваемостиУченикаToolStripMenuItem;
     }
 }

@@ -32,18 +32,22 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconPic = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonReg = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox_login = new System.Windows.Forms.TextBox();
-            this.textBox_password2 = new System.Windows.Forms.TextBox();
+            this.FIO_Student_TB = new System.Windows.Forms.TextBox();
+            this.email_TB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxSubject = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.ButtonShow = new System.Windows.Forms.PictureBox();
+            this.dateStudent_DTP = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.nuberPhone_TB = new System.Windows.Forms.MaskedTextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ButtonShow)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -52,9 +56,9 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.iconPic);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(4, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 100);
+            this.panel1.Size = new System.Drawing.Size(779, 100);
             this.panel1.TabIndex = 0;
             // 
             // iconPic
@@ -76,121 +80,164 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(654, 80);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Регистрация нового пользователя";
+            this.label1.Text = "Заявка на регистрацию в учебный центр";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // buttonReg
             // 
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(29, 292);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(742, 57);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Зарегистрироваться!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnCreate_Click);
+            this.buttonReg.Enabled = false;
+            this.buttonReg.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonReg.Location = new System.Drawing.Point(4, 373);
+            this.buttonReg.Name = "buttonReg";
+            this.buttonReg.Size = new System.Drawing.Size(779, 57);
+            this.buttonReg.TabIndex = 1;
+            this.buttonReg.Text = "Подать заявку!";
+            this.buttonReg.UseVisualStyleBackColor = true;
+            this.buttonReg.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox1.Location = new System.Drawing.Point(166, 271);
+            this.checkBox1.Location = new System.Drawing.Point(81, 347);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(544, 20);
+            this.checkBox1.Size = new System.Drawing.Size(628, 20);
             this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Я принимаю условия соглашения и несу отвественность за использование ПО";
+            this.checkBox1.Text = "Я принимаю условия соглашения и несу отвественность за предоставленную информацию" +
+    "";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // textBox_login
+            // FIO_Student_TB
             // 
-            this.textBox_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox_login.Location = new System.Drawing.Point(122, 142);
-            this.textBox_login.Name = "textBox_login";
-            this.textBox_login.Size = new System.Drawing.Size(649, 26);
-            this.textBox_login.TabIndex = 9;
+            this.FIO_Student_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FIO_Student_TB.Location = new System.Drawing.Point(143, 133);
+            this.FIO_Student_TB.Name = "FIO_Student_TB";
+            this.FIO_Student_TB.Size = new System.Drawing.Size(616, 26);
+            this.FIO_Student_TB.TabIndex = 9;
             // 
-            // textBox_password2
+            // email_TB
             // 
-            this.textBox_password2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox_password2.Location = new System.Drawing.Point(122, 185);
-            this.textBox_password2.Name = "textBox_password2";
-            this.textBox_password2.Size = new System.Drawing.Size(590, 26);
-            this.textBox_password2.TabIndex = 8;
+            this.email_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.email_TB.Location = new System.Drawing.Point(143, 176);
+            this.email_TB.Name = "email_TB";
+            this.email_TB.Size = new System.Drawing.Size(616, 26);
+            this.email_TB.TabIndex = 8;
+            this.email_TB.Leave += new System.EventHandler(this.email_TB_Leave);
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(30, 188);
+            this.label2.BackColor = System.Drawing.Color.Ivory;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(77, 61);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 23);
+            this.label2.Size = new System.Drawing.Size(60, 17);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Пароль:";
+            this.label2.Text = "Почта:";
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(33, 144);
+            this.label3.BackColor = System.Drawing.Color.Ivory;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(46, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 23);
+            this.label3.Size = new System.Drawing.Size(91, 18);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Логин:";
+            this.label3.Text = "Ваше ФИО:";
             // 
             // comboBoxSubject
             // 
             this.comboBoxSubject.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBoxSubject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxSubject.FormattingEnabled = true;
-            this.comboBoxSubject.Location = new System.Drawing.Point(122, 225);
+            this.comboBoxSubject.Location = new System.Drawing.Point(138, 173);
             this.comboBoxSubject.Name = "comboBoxSubject";
-            this.comboBoxSubject.Size = new System.Drawing.Size(649, 28);
+            this.comboBoxSubject.Size = new System.Drawing.Size(616, 28);
             this.comboBoxSubject.TabIndex = 10;
             // 
             // label4
             // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(17, 230);
+            this.label4.BackColor = System.Drawing.Color.Ivory;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(30, 179);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 23);
+            this.label4.Size = new System.Drawing.Size(102, 16);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Предмет:";
+            this.label4.Text = "Дисциплина:";
             // 
-            // ButtonShow
+            // dateStudent_DTP
             // 
-            this.ButtonShow.Image = global::RepetBase_App.Properties.Resources.close;
-            this.ButtonShow.Location = new System.Drawing.Point(722, 174);
-            this.ButtonShow.Name = "ButtonShow";
-            this.ButtonShow.Size = new System.Drawing.Size(49, 47);
-            this.ButtonShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ButtonShow.TabIndex = 13;
-            this.ButtonShow.TabStop = false;
-            this.ButtonShow.Click += new System.EventHandler(this.PictureBoxTogglePassword_Click);
+            this.dateStudent_DTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dateStudent_DTP.Location = new System.Drawing.Point(143, 218);
+            this.dateStudent_DTP.Name = "dateStudent_DTP";
+            this.dateStudent_DTP.Size = new System.Drawing.Size(616, 26);
+            this.dateStudent_DTP.TabIndex = 12;
+            this.dateStudent_DTP.Leave += new System.EventHandler(this.dateStudent_DTP_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Ivory;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(20, 220);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(131, 29);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Дата рождения:";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Ivory;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.nuberPhone_TB);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.comboBoxSubject);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Location = new System.Drawing.Point(4, 120);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(779, 215);
+            this.panel2.TabIndex = 3;
+            // 
+            // nuberPhone_TB
+            // 
+            this.nuberPhone_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.nuberPhone_TB.Location = new System.Drawing.Point(138, 138);
+            this.nuberPhone_TB.Mask = "8 (999) 000-0000";
+            this.nuberPhone_TB.Name = "nuberPhone_TB";
+            this.nuberPhone_TB.Size = new System.Drawing.Size(616, 26);
+            this.nuberPhone_TB.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Ivory;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(43, 141);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 23);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Номер тел:";
             // 
             // sign_up
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 369);
-            this.Controls.Add(this.ButtonShow);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBoxSubject);
-            this.Controls.Add(this.textBox_login);
-            this.Controls.Add(this.textBox_password2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(790, 435);
+            this.Controls.Add(this.dateStudent_DTP);
+            this.Controls.Add(this.FIO_Student_TB);
+            this.Controls.Add(this.email_TB);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonReg);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "sign_up";
             this.Text = "Регистрация пользователя";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.signUp_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.signUp_FormClosed);
-            this.Load += new System.EventHandler(this.LogInLoad);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconPic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ButtonShow)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,14 +248,18 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox iconPic;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonReg;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox_login;
-        private System.Windows.Forms.TextBox textBox_password2;
+        private System.Windows.Forms.TextBox FIO_Student_TB;
+        private System.Windows.Forms.TextBox email_TB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxSubject;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox ButtonShow;
+        private System.Windows.Forms.DateTimePicker dateStudent_DTP;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.MaskedTextBox nuberPhone_TB;
+        private System.Windows.Forms.Label label6;
     }
 }

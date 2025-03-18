@@ -12,7 +12,7 @@ public class DatabaseLogin : MonoBehaviour
     public Canvas loginCanvas;
     public Canvas mainCanvas;
 
-    private string loginUrl = "http://192.168.0.100:5000/login";
+    private string loginUrl = "http://192.168.0.101:5000/login";
 
     void Start()
     {
