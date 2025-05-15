@@ -7,7 +7,7 @@ create table register
 (
 	id_User int PRIMARY KEY IDENTITY,
 	login_user NVARCHAR(50) UNIQUE NOT NULL,
-	password_user NVARCHAR(50) NOT NULL,
+	password_user NVARCHAR(100) NOT NULL,
 	subject_user NVARCHAR(50) NOT NULL,
 	status_user NVARCHAR(50) CHECK (status_user IN ('admin', 'учащийся', 'учитель')) NOT NULL,
 );
@@ -86,15 +86,6 @@ CREATE TABLE StudentGrades (
     FOREIGN KEY (StudentId) REFERENCES Student(student_id)
 );
 
-
--- Создание Ссылки на занятие
---create table links_of_Zanytia
---(
---	links_id int PRIMARY KEY IDENTITY,
---	schedule_id int,
---	link_name NVARCHAR(250)
---);
-
 -- Добавление новых пользователей
 INSERT INTO register (login_user, password_user, subject_user, status_user) 
 VALUES 
@@ -123,7 +114,8 @@ VALUES
     (null, 'Смирнов Алексей Павлович', '8(905)999-99-99', 'Магистр', 'Русский Язык');
 
 INSERT INTO Pridments (Name_Pridment) 
-			VALUES ('Математика'),
+			VALUES ('ADMIN_PROFILE'),
+				   ('Математика'),
 				   ('Русский Язык'),
 				   ('Физика'),
 				   ('Химия'),
@@ -146,12 +138,3 @@ VALUES
     (3, 1, '20.10.2022', 5000, 'Не оплаченно'),
     (4, 3, '25.10.2022', 2500, 'Оплачено'),
     (5, 4, '28.10.2022', 3500, 'Не оплаченно');
-
--- Добавление ссылок на занятия
--- INSERT INTO links_of_Zanytia (schedule_id, link_name) 
--- VALUES 
---    (1, 'https://zoom.us/j/1234567890'),
---    (2, 'https://zoom.us/j/2345678901'),
---    (3, 'https://zoom.us/j/3456789012'),
---    (4, 'https://zoom.us/j/4567890123'),
---    (5, 'https://zoom.us/j/5678901234');

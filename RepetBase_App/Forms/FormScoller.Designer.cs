@@ -66,10 +66,10 @@ namespace RepetBase_App
             // 
             this.TimeOfWorkPage.Controls.Add(this.panel1);
             this.TimeOfWorkPage.Controls.Add(this.dataGridView2);
-            this.TimeOfWorkPage.Location = new System.Drawing.Point(4, 25);
+            this.TimeOfWorkPage.Location = new System.Drawing.Point(4, 22);
             this.TimeOfWorkPage.Name = "TimeOfWorkPage";
             this.TimeOfWorkPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TimeOfWorkPage.Size = new System.Drawing.Size(1142, 677);
+            this.TimeOfWorkPage.Size = new System.Drawing.Size(1142, 680);
             this.TimeOfWorkPage.TabIndex = 1;
             this.TimeOfWorkPage.Text = "Расписание занятия";
             this.TimeOfWorkPage.UseVisualStyleBackColor = true;
@@ -106,9 +106,9 @@ namespace RepetBase_App
             // 
             this.PaymentPage.Controls.Add(this.panel3);
             this.PaymentPage.Controls.Add(this.dataGridView3);
-            this.PaymentPage.Location = new System.Drawing.Point(4, 25);
+            this.PaymentPage.Location = new System.Drawing.Point(4, 22);
             this.PaymentPage.Name = "PaymentPage";
-            this.PaymentPage.Size = new System.Drawing.Size(1142, 677);
+            this.PaymentPage.Size = new System.Drawing.Size(1142, 680);
             this.PaymentPage.TabIndex = 2;
             this.PaymentPage.Text = "Оплата занятия";
             this.PaymentPage.UseVisualStyleBackColor = true;
@@ -157,7 +157,7 @@ namespace RepetBase_App
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.выходИзПрофиляToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // выходИзПрофиляToolStripMenuItem
@@ -170,7 +170,7 @@ namespace RepetBase_App
             // справкаДляУченикаToolStripMenuItem
             // 
             this.справкаДляУченикаToolStripMenuItem.Name = "справкаДляУченикаToolStripMenuItem";
-            this.справкаДляУченикаToolStripMenuItem.Size = new System.Drawing.Size(139, 20);
+            this.справкаДляУченикаToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
             this.справкаДляУченикаToolStripMenuItem.Text = "Справка для Ученика!";
             // 
             // FormScoller

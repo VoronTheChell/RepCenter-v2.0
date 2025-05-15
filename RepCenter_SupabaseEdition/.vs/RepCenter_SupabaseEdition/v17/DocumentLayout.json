@@ -1,0 +1,211 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\repcenter_supabaseedition\\forms\\loginup_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\loginup_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\repcenter_supabaseedition.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\repcenter_supabaseedition.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\studentevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\studentevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\admin_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\admin_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\formteacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\formteacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\formscoller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\formscoller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\studentevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\studentevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\formscoller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\formscoller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|g:\\gitclone\\repcenter-v2.0\\repcenter_supabaseedition\\repcenter_supabaseedition\\forms\\admin_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\admin_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\repcenter_supabaseedition\\forms\\formteacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4787AE32-4C0B-4480-9393-4A34ADC4A931}|RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj|solutionrelative:repcenter_supabaseedition\\forms\\formteacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Program.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Program.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Program.cs",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Program.cs",
+              "ViewState": "AgIAACoBAAAAAAAAAAA7wFsBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T13:51:19.314Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "loginUp_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\loginUp_Form.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\loginUp_Form.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\loginUp_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\loginUp_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T18:31:36.327Z",
+              "IsPinned": true,
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RepCenter_SupabaseEdition",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-15T17:42:20.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StudentEvaluationForm.cs",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T16:22:49.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StudentEvaluationForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\StudentEvaluationForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T16:23:15.283Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FormScoller.cs",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormScoller.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\FormScoller.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormScoller.cs",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\FormScoller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T15:47:04.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FormScoller.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormScoller.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\FormScoller.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormScoller.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\FormScoller.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T09:41:45.182Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FormTeacher.cs",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T15:55:35.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FormTeacher.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\FormTeacher.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T11:03:51.098Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Admin_Form.cs",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwFAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T18:23:14.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Admin_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs",
+              "RelativeDocumentMoniker": "RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs",
+              "ToolTip": "G:\\GitClone\\RepCenter-v2.0\\RepCenter_SupabaseEdition\\RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "RepCenter_SupabaseEdition\\Forms\\Admin_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T12:02:35.983Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

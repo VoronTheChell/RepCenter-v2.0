@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Forms\Admin_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ClipUserStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormScoller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormTeacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\loginUp_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\SelectAndSendEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\singUp_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\StudentEvaluationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TeacherEvaluationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

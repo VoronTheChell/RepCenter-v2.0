@@ -15,6 +15,8 @@ namespace RepetBase_App
         {
             InitializeComponent(); AppConfig();
             LoadSubjectsToComboBox();
+
+            buttonReg.Enabled = false;
         }
 
         private void AppConfig()

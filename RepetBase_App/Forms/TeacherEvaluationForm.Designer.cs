@@ -46,7 +46,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(522, 237);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 13);
+            this.label5.Size = new System.Drawing.Size(122, 13);
             this.label5.TabIndex = 19;
             this.label5.Text = "Пароль пользователя:";
             // 
@@ -55,12 +55,13 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(522, 177);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.Size = new System.Drawing.Size(106, 13);
             this.label4.TabIndex = 18;
             this.label4.Text = "Имя пользователя:";
             // 
             // passUser_TB
             // 
+            this.passUser_TB.BackColor = System.Drawing.SystemColors.Control;
             this.passUser_TB.Enabled = false;
             this.passUser_TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.passUser_TB.Location = new System.Drawing.Point(525, 253);
@@ -94,7 +95,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(7, 117);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(224, 13);
+            this.label2.Size = new System.Drawing.Size(214, 13);
             this.label2.TabIndex = 14;
             this.label2.Text = "Выбирете аккаунт для привязки учителя";
             // 
@@ -103,7 +104,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(311, 13);
+            this.label1.Size = new System.Drawing.Size(296, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Выбирите учителя к которуму хотите привязать аккаунт:";
             // 

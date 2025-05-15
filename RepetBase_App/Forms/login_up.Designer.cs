@@ -60,7 +60,7 @@
             this.Reg_Link.AutoSize = true;
             this.Reg_Link.Location = new System.Drawing.Point(159, 482);
             this.Reg_Link.Name = "Reg_Link";
-            this.Reg_Link.Size = new System.Drawing.Size(239, 13);
+            this.Reg_Link.Size = new System.Drawing.Size(229, 13);
             this.Reg_Link.TabIndex = 1;
             this.Reg_Link.TabStop = true;
             this.Reg_Link.Text = "Нет профиля, заргистрируйся уже сегодня!";
@@ -153,6 +153,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // menuStrip1
             // 

@@ -161,9 +161,9 @@ namespace RepetBase_App.Forms
         {
             try
             {
-                using (var smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587))
+                using (var smtpClient = new System.Net.Mail.SmtpClient("smtp.yandex.ru", 587))
                 {
-                    smtpClient.Credentials = new System.Net.NetworkCredential("max20131102@gmail.com", "zxub xatf ahvu soeb");
+                    smtpClient.Credentials = new System.Net.NetworkCredential("Kontychan@yandex.ru", "vrkzpkkvbqlblkvx");
                     smtpClient.EnableSsl = true;
 
                     var mailMessage = new System.Net.Mail.MailMessage

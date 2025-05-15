@@ -124,16 +124,16 @@ namespace RepetBase_App.Forms
         {
             try
             {
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com")
+                SmtpClient smtpClient = new SmtpClient("smtp.yandex.ru")
                 {
                     Port = 587,
-                    Credentials = new NetworkCredential("max20131102@gmail.com", "zxub xatf ahvu soeb"),
+                    Credentials = new NetworkCredential("Kontychan@yandex.ru", "vrkzpkkvbqlblkvx"),
                     EnableSsl = true
                 };
 
                 MailMessage mailMessage = new MailMessage
                 {
-                    From = new MailAddress("max20131102@gmail.com"),
+                    From = new MailAddress("Kontychan@yandex.ru"),
                     Subject = "Оплата занятия",
                     Body = $"Здравствуйте!\n\n" +
                            $"Ниже будет прикреплен файл с вашим чеком.\n\nС уважением, администрация учебный центр: 'Умники и умницы'.",

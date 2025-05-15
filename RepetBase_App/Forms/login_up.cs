@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -111,76 +110,92 @@ namespace RepetBase_App
             var loginUser = textBox_login.Text;
             var passUser = textBox_password.Text;
 
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable table = new DataTable();
-
-            int userId = GetUserIdByCredentials(loginUser, passUser);
-
-            string querystring = $"select id_user, login_user, password_user from register where login_user = '{loginUser}' and password_user = '{passUser}'";
-
-            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-
-            // Сommand Code
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-
-
-            if (table.Rows.Count == 1)
+            if (string.IsNullOrWhiteSpace(loginUser) || string.IsNullOrWhiteSpace(passUser))
             {
-                MessageBox.Show("Вы успешно вошли!", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Введите логин и пароль.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                textBox_login.Text = "";
-                textBox_password.Text = "";
+            string query = "SELECT id_user, password_user, status_user FROM register WHERE login_user = @Login";
+            SqlCommand command = new SqlCommand(query, dataBase.GetConnection());
+            command.Parameters.AddWithValue("@Login", loginUser);
 
+            SqlDataReader reader = null;
+
+            try
+            {
                 dataBase.openConnection();
-                string checkStatus = $"SELECT status_user from register where login_user like '{loginUser}'";
-                SqlCommand commandCheck = new SqlCommand(checkStatus, dataBase.GetConnection());
-                string status = ((string)commandCheck.ExecuteScalar());
+                reader = command.ExecuteReader();
 
-                switch (status)
+                if (reader.Read())
                 {
-                    case "admin":
+                    int userId = reader.GetInt32(0);
+                    string hashedPassword = reader.GetString(1);
+                    string status = reader.GetString(2).Trim(); // <-- добавил Trim()
+
+                    bool isPasswordValid = BCrypt.Net.BCrypt.Verify(passUser, hashedPassword);
+
+                    if (isPasswordValid)
+                    {
+                        reader.Close();
+                        dataBase.closeConnection();
+
+                        MessageBox.Show("Вы успешно вошли!", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        textBox_login.Text = "";
+                        textBox_password.Text = "";
+
+                        // Временно добавь сюда для проверки:
+                        // MessageBox.Show($"Статус пользователя: '{status}'");
+
+                        switch (status)
                         {
-                            Admin_Form adminForm = new Admin_Form();
+                            case "admin":
+                                var adminForm = new Admin_Form();
+                                adminForm.FormClosed += (s, args) => this.Close();
+                                adminForm.Show();
+                                this.Hide();
+                                break;
 
-                            this.Hide();
-                            adminForm.ShowDialog();
-                            this.Show();
-                            break;
+                            case "учащийся":
+                                var scollerForm = new FormScoller(userId);
+                                scollerForm.FormClosed += (s, args) => this.Close();
+                                scollerForm.Show();
+                                this.Hide();
+                                break;
+
+                            case "учитель":
+                                var teacherForm = new FormTeacher(userId);
+                                teacherForm.FormClosed += (s, args) => this.Close();
+                                teacherForm.Show();
+                                this.Hide();
+                                break;
+
+                            default:
+                                MessageBox.Show($"Неизвестный статус пользователя: '{status}'", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
                         }
-
-                    case "учащийся":
-                        {
-                            FormScoller scollerForm = new FormScoller(userId);
-
-                            this.Hide();
-                            scollerForm.ShowDialog();
-                            this.Show();
-                            break;
-                        }
-
-                    case "учитель":
-                        {
-                            FormTeacher teacherForm = new FormTeacher(userId);
-
-                            this.Hide();
-                            teacherForm.ShowDialog();
-                            this.Show();
-                            break;
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка входа!\nНеверный пароль!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                    
-
-                
+                else
+                {
+                    MessageBox.Show("Ошибка входа!\nТакой пользователь не найден!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Ошибка входа!\nТого пользователя не существует или вы вели не верный пароль!", "Ошибка...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Ошибка при попытке входа: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            
+            finally
+            {
+                reader?.Close();
+                dataBase.closeConnection();
+            }
         }
+
 
         private void Reg_Link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -200,6 +215,11 @@ namespace RepetBase_App
         private void label3_Click(object sender, EventArgs e)
         {
             label3.Text = "Знания сила, cпорт могила!";
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

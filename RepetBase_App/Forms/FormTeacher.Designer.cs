@@ -94,34 +94,34 @@ namespace RepetBase_App
             this.оценкаУспеваемостиУченикаToolStripMenuItem,
             this.выйтиИзПрофиляToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // сохранитьКакToolStripMenuItem
             // 
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
             this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
             // 
             // оценкаУспеваемостиУченикаToolStripMenuItem
             // 
             this.оценкаУспеваемостиУченикаToolStripMenuItem.Name = "оценкаУспеваемостиУченикаToolStripMenuItem";
-            this.оценкаУспеваемостиУченикаToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.оценкаУспеваемостиУченикаToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.оценкаУспеваемостиУченикаToolStripMenuItem.Text = "Оценка успеваемости ученика";
             this.оценкаУспеваемостиУченикаToolStripMenuItem.Click += new System.EventHandler(this.оценкаУспеваемостиУченикаToolStripMenuItem_Click);
             // 
             // выйтиИзПрофиляToolStripMenuItem
             // 
             this.выйтиИзПрофиляToolStripMenuItem.Name = "выйтиИзПрофиляToolStripMenuItem";
-            this.выйтиИзПрофиляToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.выйтиИзПрофиляToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.выйтиИзПрофиляToolStripMenuItem.Text = "Выйти из профиля";
             this.выйтиИзПрофиляToolStripMenuItem.Click += new System.EventHandler(this.выйтиИзПрофиляToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // tabControl1
@@ -139,10 +139,10 @@ namespace RepetBase_App
             // 
             this.StudentPage.Controls.Add(this.panel1);
             this.StudentPage.Controls.Add(this.dataGridView1);
-            this.StudentPage.Location = new System.Drawing.Point(4, 25);
+            this.StudentPage.Location = new System.Drawing.Point(4, 22);
             this.StudentPage.Name = "StudentPage";
             this.StudentPage.Padding = new System.Windows.Forms.Padding(3);
-            this.StudentPage.Size = new System.Drawing.Size(1104, 683);
+            this.StudentPage.Size = new System.Drawing.Size(1104, 686);
             this.StudentPage.TabIndex = 0;
             this.StudentPage.Text = "Студенты";
             this.StudentPage.UseVisualStyleBackColor = true;
@@ -217,10 +217,10 @@ namespace RepetBase_App
             this.TimeOfWorkPage.Controls.Add(this.buttonDel);
             this.TimeOfWorkPage.Controls.Add(this.panel2);
             this.TimeOfWorkPage.Controls.Add(this.dataGridView2);
-            this.TimeOfWorkPage.Location = new System.Drawing.Point(4, 25);
+            this.TimeOfWorkPage.Location = new System.Drawing.Point(4, 22);
             this.TimeOfWorkPage.Name = "TimeOfWorkPage";
             this.TimeOfWorkPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TimeOfWorkPage.Size = new System.Drawing.Size(1104, 683);
+            this.TimeOfWorkPage.Size = new System.Drawing.Size(1104, 686);
             this.TimeOfWorkPage.TabIndex = 1;
             this.TimeOfWorkPage.Text = "Расписание занятия";
             this.TimeOfWorkPage.UseVisualStyleBackColor = true;
@@ -272,7 +272,7 @@ namespace RepetBase_App
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(780, 175);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(121, 13);
+            this.label22.Size = new System.Drawing.Size(118, 13);
             this.label22.TabIndex = 27;
             this.label22.Text = "Дата начала занятия:";
             // 
@@ -281,7 +281,7 @@ namespace RepetBase_App
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(781, 123);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(59, 13);
+            this.label20.Size = new System.Drawing.Size(58, 13);
             this.label20.TabIndex = 25;
             this.label20.Text = "Студенты:";
             // 
@@ -353,9 +353,9 @@ namespace RepetBase_App
             // 
             this.PaymentPage.Controls.Add(this.panel3);
             this.PaymentPage.Controls.Add(this.dataGridView3);
-            this.PaymentPage.Location = new System.Drawing.Point(4, 25);
+            this.PaymentPage.Location = new System.Drawing.Point(4, 22);
             this.PaymentPage.Name = "PaymentPage";
-            this.PaymentPage.Size = new System.Drawing.Size(1104, 683);
+            this.PaymentPage.Size = new System.Drawing.Size(1104, 686);
             this.PaymentPage.TabIndex = 2;
             this.PaymentPage.Text = "Оплата занятия";
             this.PaymentPage.UseVisualStyleBackColor = true;

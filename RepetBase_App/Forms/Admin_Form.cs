@@ -1,12 +1,9 @@
-﻿using System;
+﻿using RepetBase_App.Forms;
+
+using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
-
-using System.Net.Mail;
-using System.Net;
-using RepetBase_App.Forms;
 
 using Aspose.Pdf;
 using Aspose.Pdf.Text;
@@ -67,6 +64,7 @@ namespace RepetBase_App
         {
             FillDataGridView("SELECT id_User AS 'ID', login_user AS 'Логин пользователей', password_user AS 'Пароли', subject_user AS 'Предметы', " +
                              "status_user AS 'Тип пользователя' FROM register", UsersDGV);
+
 
             FillDataGridView("SELECT student_id AS 'ID', FIO AS 'ФИО', Date_Birth AS 'Дата рождения', Number_Phone AS 'Номер телефона', " +
                              "Email_adress AS 'Почта', Predmet AS 'Предмет' FROM Student", StudentDGV);
@@ -338,18 +336,24 @@ namespace RepetBase_App
 
                     id_users = Convert.ToInt32(row.Cells[0].Value);
                     UserLogin_TB.Text = row.Cells[1].Value.ToString();
-                    UserPass_TB.Text = row.Cells[2].Value.ToString();
+
+                    // Хэшированный пароль, чтобы его нельзя было использовать напрямую
+                    string hashedPassword = row.Cells[2].Value.ToString();
+
+                    // Если нужно показать хэш, можно отобразить его
+                    // Важно, что пароль не может быть восстановлен из хэша
+                    UserPass_TB.Text = "******"; // Пример, скрываем хэш (показываем вместо пароля звёздочки)
+
                     Users_Primary_CB.Text = row.Cells[3].Value.ToString();
                     TypeOfUser_CB.Text = row.Cells[4].Value.ToString();
                 }
-
-                catch 
+                catch
                 {
                     MessageBox.Show("Вы выбрали пустую строчку!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                
             }
         }
+
 
         private void ClearUserFields()
         {
@@ -381,12 +385,18 @@ namespace RepetBase_App
 
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            string addCommandString = "INSERT INTO register (login_user, password_user, subject_user, status_user) VALUES (@Login, @Password, @Subject, @Status)";
+            // Сначала захэшируем пароль
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(UserPass_TB.Text);
+
+            string addCommandString = "INSERT INTO register (login_user, password_user, subject_user, status_user) " +
+                                       "VALUES (@Login, @Password, @Subject, @Status)";
+
             ExecuteQuery(addCommandString,
                          ("@Login", UserLogin_TB.Text),
-                         ("@Password", UserPass_TB.Text),
+                         ("@Password", hashedPassword), // здесь отправляем уже не сырой пароль, а его хэш
                          ("@Subject", Users_Primary_CB.Text),
                          ("@Status", TypeOfUser_CB.Text));
+
             ClearUserFields();
             CreateColumns();
             MessageBox.Show("Запись успешно создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -394,21 +404,27 @@ namespace RepetBase_App
 
         private void buttonChange_Click(object sender, EventArgs e)
         {
+            // Хэшируем новый пароль
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(UserPass_TB.Text);
+
             string changeCommandString = "UPDATE register SET login_user = @Login, password_user = @Password, subject_user = @Subject, status_user = @Status WHERE id_User = @UserID";
+
             ExecuteQuery(changeCommandString,
                          ("@Login", UserLogin_TB.Text),
-                         ("@Password", UserPass_TB.Text),
+                         ("@Password", hashedPassword), // передаем хэшированный пароль
                          ("@Subject", Users_Primary_CB.Text),
                          ("@Status", TypeOfUser_CB.Text),
                          ("@UserID", id_users));
+
             ClearUserFields();
             CreateColumns();
             MessageBox.Show("Запись успешно изменена!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
+
 
         private void ClearButton1_Click(object sender, EventArgs e)
         {
+            ClearUserFields();
             UsersDGV.Update();
         }
 
@@ -644,7 +660,7 @@ namespace RepetBase_App
             }
         }
 
-        public int selectIdStudent, selectIdTeacher;
+        // public int selectIdStudent, selectIdTeacher;
 
         private void DataLearnDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -971,22 +987,26 @@ namespace RepetBase_App
 
         private void printCheck_button_Click(object sender, EventArgs e)
         {
-            // Извлекаем данные из элементов управления
-            string scroller = PayScoller_CB.SelectedItem?.ToString() ?? "Не указано";
-            string teacher = PayTeacher_CB.SelectedItem?.ToString() ?? "Не указано";
-            DateTime paymentDate = Data_Pay_DTP.Value; // Извлечение значения из DateTimePicker
-            decimal amount;
+            var scroller = PayScoller_CB.SelectedItem?.ToString() ?? "Не указано";
+            var teacher = PayTeacher_CB.SelectedItem?.ToString() ?? "Не указано";
+            var paymentDate = Data_Pay_DTP.Value;
 
-            // Проверка суммы
-            if (!decimal.TryParse(ValuesRUB_TB.Text, out amount))
+            if (!decimal.TryParse(ValuesRUB_TB.Text, out var amount))
             {
                 MessageBox.Show("Введите корректную сумму!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Сохраняем чек
-            SaveBeautifulReceipt(scroller, "Администратор школы", "410056, г. Саратов, ул. им. Пугачева Е.И., д.72", "Оплата за обучение",
-                "Предоплата 100%", amount.ToString(), DateTime.Now.ToString("dd.MM.yyyy HH:mm"), "6");
+            SaveBeautifulReceipt(
+                scroller,
+                "Администратор школы",
+                "410056, г. Саратов, ул. им. Пугачева Е.И., д.72",
+                "Оплата за обучение",
+                "Предоплата 100%",
+                amount.ToString(),
+                DateTime.Now.ToString("dd.MM.yyyy HH:mm"),
+                "6"
+            );
         }
 
         public void SaveBeautifulReceipt(string cashierName, string adminRole, string organization,
@@ -995,98 +1015,39 @@ namespace RepetBase_App
         {
             try
             {
-                // Создаем документ PDF
-                Document pdfDocument = new Document();
-                Page page = pdfDocument.Pages.Add();
-
-                // Устанавливаем стиль страницы
+                var pdfDocument = new Document();
+                var page = pdfDocument.Pages.Add();
                 page.PageInfo.Margin = new MarginInfo(20, 20, 20, 20);
 
-                // Добавляем заголовок
-                TextFragment header = new TextFragment($"КАССОВЫЙ ЧЕК № {receiptNumber}");
-                header.TextState.FontSize = 14;
-                header.TextState.FontStyle = FontStyles.Bold;
-                header.TextState.ForegroundColor = Aspose.Pdf.Color.Blue;
-                header.TextState.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Center;
-                page.Paragraphs.Add(header);
+                AddHeader(page, $"\nКАССОВЫЙ ЧЕК № {receiptNumber}");
+                AddSeparator(page);
+                AddText(page, $"\nДата: {paymentDate}\nСмена: 1\nКассир: {cashierName}");
+                AddText(page, $"{organization}\nОбразовательные услуги");
+                AddSeparator(page);
+                AddHeader(page, "\nИТОГ", 12);
 
-                // Создаем объект Graph для линии
-                Graph graph = new Graph(500, 20); // Ширина и высота графической области
-                Line line = new Line(new float[] { 0, 0, 500, 0 })  // Координаты: от (0, 0) до (500, 0)
-                {
-                    GraphInfo = new GraphInfo
-                    {
-                        LineWidth = 1.5f,  // Толщина линии
-                        Color = Aspose.Pdf.Color.Gray  // Цвет линии
-                    }
-                };
-                graph.Shapes.Add(line);
-                page.Paragraphs.Add(graph);
-
-                // Добавляем дату и смену
-                TextFragment dateShiftInfo = new TextFragment($"Дата: {paymentDate}\nСмена: 1\nКассир: {cashierName}");
-                dateShiftInfo.TextState.FontSize = 10;
-                page.Paragraphs.Add(dateShiftInfo);
-
-                // Добавляем информацию об организации
-                TextFragment organizationInfo = new TextFragment($"{organization}\nОбразовательные услуги");
-                organizationInfo.TextState.FontSize = 10;
-                page.Paragraphs.Add(organizationInfo);
-
-                // Создаем объект Graph для линии
-                Graph graph2 = new Graph(500, 20); // Ширина и высота графической области
-                Line line2 = new Line(new float[] { 0, 0, 1500, 0 })  // Координаты: от (0, 0) до (500, 0)
-                {
-                    GraphInfo = new GraphInfo
-                    {
-                        LineWidth = 1.5f,  // Толщина линии
-                        Color = Aspose.Pdf.Color.Gray  // Цвет линии
-                    }
-                };
-                graph.Shapes.Add(line2);
-                page.Paragraphs.Add(graph2);
-
-                // Добавляем текст прихода
-                TextFragment incomeHeader = new TextFragment("ПРИХОД");
-                // Изменяем свойства существующего объекта TextState
-                incomeHeader.TextState.FontSize = 12;
-                incomeHeader.TextState.FontStyle = FontStyles.Bold;
-                incomeHeader.TextState.ForegroundColor = Aspose.Pdf.Color.Blue;
-                page.Paragraphs.Add(incomeHeader);
-
-                // Добавляем таблицу для деталей платежа
-                Table detailsTable = new Table
+                var detailsTable = new Table
                 {
                     ColumnWidths = "100 100",
                     DefaultCellTextState = new TextState { FontSize = 10 }
                 };
 
-                // Заголовок таблицы
-                Row headerRow = detailsTable.Rows.Add();
-                headerRow.Cells.Add("Описание");
-                headerRow.Cells.Add("Сумма");
-
-                // Данные таблицы
-                Row dataRow1 = detailsTable.Rows.Add();
-                dataRow1.Cells.Add($"Пополнение счета: {serviceType}");
-                dataRow1.Cells.Add($"{paymentAmount} RUB");
-
-                Row dataRow2 = detailsTable.Rows.Add();
-                dataRow2.Cells.Add("ИТОГО:");
-                dataRow2.Cells.Add($"{paymentAmount} RUB");
+                AddTableRow(detailsTable, "Описание", "Сумма");
+                AddTableRow(detailsTable, $"Пополнение счета: {serviceType}", $"{paymentAmount} RUB");
+                AddTableRow(detailsTable, "ИТОГО:", $"{paymentAmount} RUB");
 
                 page.Paragraphs.Add(detailsTable);
 
-                // Сохраняем чек
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                var saveFileDialog = new SaveFileDialog
                 {
-                    saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
-                    saveFileDialog.Title = "Сохранить чек как...";
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        pdfDocument.Save(saveFileDialog.FileName);
-                        MessageBox.Show("Чек успешно сохранен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    Filter = "PDF files (*.pdf)|*.pdf",
+                    Title = "Сохранить чек как..."
+                };
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pdfDocument.Save(saveFileDialog.FileName);
+                    MessageBox.Show("Чек успешно сохранен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1094,6 +1055,53 @@ namespace RepetBase_App
                 MessageBox.Show($"Ошибка при сохранении чека: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void AddHeader(Page page, string text, int fontSize = 14)
+        {
+            var header = new TextFragment(text)
+            {
+                TextState =
+        {
+            FontSize = fontSize,
+            FontStyle = FontStyles.Bold,
+            ForegroundColor = Aspose.Pdf.Color.Blue,
+            HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Center
+        }
+            };
+            page.Paragraphs.Add(header);
+        }
+
+        private void AddText(Page page, string text, int fontSize = 10)
+        {
+            var fragment = new TextFragment(text)
+            {
+                TextState = { FontSize = fontSize }
+            };
+            page.Paragraphs.Add(fragment);
+        }
+
+        private void AddSeparator(Page page)
+        {
+            var graph = new Graph(500.0, 20.0); // Используем double
+            var line = new Line(new[] { 0.0f, 0.0f, 500.0f, 0.0f })
+            {
+                GraphInfo = new GraphInfo
+                {
+                    LineWidth = 1.5f,
+                    Color = Aspose.Pdf.Color.Gray
+                }
+            };
+            graph.Shapes.Add(line);
+            page.Paragraphs.Add(graph);
+        }
+
+        private void AddTableRow(Table table, string cell1, string cell2)
+        {
+            var row = table.Rows.Add();
+            row.Cells.Add(cell1);
+            row.Cells.Add(cell2);
+        }
+
 
         private void buttonSend_Click(object sender, EventArgs e)
         {

@@ -159,11 +159,7 @@ namespace RepetBase_App.Forms
             }
 
             // Проверяем, выбран ли студент в ComboBox
-            if (selectTeacher_CB.SelectedIndex == -1)
-            {
-                MessageBox.Show("Выберите студента из списка для связывания.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            
 
             // Получаем логин выбранного пользователя
             string selectedLogin = SelectUserTeacher_DGV.SelectedRows[0].Cells["Логин пользователей"].Value.ToString();
